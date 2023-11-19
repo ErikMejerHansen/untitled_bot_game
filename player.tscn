@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpj8sk7bs5eou"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_8pc4r"]
+[ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://res/sprites/bot/Torso.png" id="1_a7nsw"]
+[ext_resource type="Texture2D" uid="uid://caehngcd7eyde" path="res://res/sprites/bot/left_foot.png" id="1_hl5vg"]
+[ext_resource type="Texture2D" uid="uid://umv3ece2nqil" path="res://res/sprites/bot/right_foot.png" id="2_0yd6b"]
+[ext_resource type="Texture2D" uid="uid://coe0e3eria5od" path="res://res/sprites/bot/left_armament.png" id="3_iu60i"]
+[ext_resource type="Texture2D" uid="uid://bbap885k80uf6" path="res://res/sprites/bot/right_armament.png" id="4_e1rui"]
+[ext_resource type="Script" path="res://left_arm.gd" id="5_ceo6o"]
+[ext_resource type="Script" path="res://right_arm.gd" id="7_2764x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
+size = Vector2(1068, 531)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(149, -114)
+script = ExtResource("1_8pc4r")
+
+[node name="left_foot" type="Sprite2D" parent="."]
+position = Vector2(-72, -271)
+texture = ExtResource("1_hl5vg")
+
+[node name="right_foot" type="Sprite2D" parent="."]
+position = Vector2(-55, 289)
+texture = ExtResource("2_0yd6b")
+
+[node name="left_arm" type="Sprite2D" parent="."]
+position = Vector2(-84, -437)
+texture = ExtResource("3_iu60i")
+offset = Vector2(172, -22)
+script = ExtResource("5_ceo6o")
+
+[node name="right_arm" type="Sprite2D" parent="."]
+position = Vector2(-84, 441)
+texture = ExtResource("4_e1rui")
+offset = Vector2(169, 25)
+script = ExtResource("7_2764x")
+
+[node name="torso" type="Sprite2D" parent="."]
+position = Vector2(-3, 2)
+texture = ExtResource("1_a7nsw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_s130o")
+
+[connection signal="arm_rotation_clamp" from="left_arm" to="." method="_on_arm_rotation_clamp"]
+[connection signal="arm_rotation_clamp" from="right_arm" to="." method="_on_arm_rotation_clamp"]
