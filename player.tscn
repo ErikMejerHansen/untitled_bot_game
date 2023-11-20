@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=14 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://res/sprites/bot/Torso.png" id="1_a7nsw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://coe0e3eria5od" path="res://res/sprites/bot/left_armament.png" id="3_iu60i"]
 [ext_resource type="Texture2D" uid="uid://bbap885k80uf6" path="res://res/sprites/bot/right_armament.png" id="4_e1rui"]
 [ext_resource type="Script" path="res://components/clamped_rotation.gd" id="8_gabx1"]
+[ext_resource type="Texture2D" uid="uid://c4t7wywcp0vko" path="res://res/sprites/bot/smoke_puff.png" id="8_nv2u1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
 size = Vector2(1068, 531)
@@ -156,6 +157,19 @@ _data = {
 "forward": SubResource("Animation_61avl")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k507m"]
+lifetime_randomness = 0.08
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+angular_velocity_max = 3.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.5
+color = Color(0.176471, 0.176471, 0.176471, 0.356863)
+turbulence_enabled = true
+turbulence_noise_strength = 1.84
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(149, -114)
 motion_mode = 1
@@ -210,6 +224,27 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.7, 0.7)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-211, 145)
+scale = Vector2(0.1, 0.1)
+process_material = SubResource("ParticleProcessMaterial_k507m")
+texture = ExtResource("8_nv2u1")
+speed_scale = 0.4
+explosiveness = 0.09
+randomness = 0.09
+visibility_rect = Rect2(-100, 100, 200, 200)
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(-211, -137)
+scale = Vector2(0.1, 0.1)
+amount = 7
+process_material = SubResource("ParticleProcessMaterial_k507m")
+texture = ExtResource("8_nv2u1")
+speed_scale = 0.4
+explosiveness = 0.09
+randomness = 0.09
+visibility_rect = Rect2(-100, 100, 200, 200)
 
 [connection signal="rotation_clamped" from="left_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
 [connection signal="rotation_clamped" from="right_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
