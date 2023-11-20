@@ -7,6 +7,8 @@ const ROTATE_SPEED = 0.7
 var rotate_clockwise = false
 var rotate_counter_clockwise = false
 
+@export var Bullet: PackedScene
+
 func _physics_process(delta):
 	
 	if(rotate_clockwise):

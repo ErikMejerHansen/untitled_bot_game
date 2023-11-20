@@ -1,13 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=16 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://res/sprites/bot/Torso.png" id="1_a7nsw"]
 [ext_resource type="Texture2D" uid="uid://caehngcd7eyde" path="res://res/sprites/bot/left_foot.png" id="1_hl5vg"]
 [ext_resource type="Texture2D" uid="uid://umv3ece2nqil" path="res://res/sprites/bot/right_foot.png" id="2_0yd6b"]
+[ext_resource type="PackedScene" uid="uid://8wpsaxivv7xs" path="res://bullet.tscn" id="2_5upe2"]
 [ext_resource type="Texture2D" uid="uid://coe0e3eria5od" path="res://res/sprites/bot/left_armament.png" id="3_iu60i"]
 [ext_resource type="Texture2D" uid="uid://bbap885k80uf6" path="res://res/sprites/bot/right_armament.png" id="4_e1rui"]
 [ext_resource type="Script" path="res://components/clamped_rotation.gd" id="8_gabx1"]
 [ext_resource type="Texture2D" uid="uid://c4t7wywcp0vko" path="res://res/sprites/bot/smoke_puff.png" id="8_nv2u1"]
+[ext_resource type="Script" path="res://components/weapon.gd" id="8_xvp7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
 size = Vector2(1068, 531)
@@ -170,8 +172,8 @@ color = Color(0.176471, 0.176471, 0.176471, 0.356863)
 turbulence_enabled = true
 turbulence_noise_strength = 1.84
 
-[node name="Player" type="CharacterBody2D"]
-position = Vector2(149, -114)
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(159, -114)
 motion_mode = 1
 script = ExtResource("1_8pc4r")
 
@@ -190,6 +192,24 @@ position = Vector2(-84, -437)
 texture = ExtResource("3_iu60i")
 offset = Vector2(172, -22)
 
+[node name="Muzzle3" type="Marker2D" parent="left_arm"]
+position = Vector2(355, -51)
+
+[node name="Weapon3" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle")]
+script = ExtResource("8_xvp7w")
+muzzle = NodePath("../Muzzle3")
+rate_of_fire = 0.1
+Bullet = ExtResource("2_5upe2")
+
+[node name="Muzzle4" type="Marker2D" parent="left_arm"]
+position = Vector2(355, 3)
+
+[node name="Weapon4" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle")]
+script = ExtResource("8_xvp7w")
+muzzle = NodePath("../Muzzle4")
+rate_of_fire = 0.2
+Bullet = ExtResource("2_5upe2")
+
 [node name="RotationClamp" type="Node" parent="left_arm" node_paths=PackedStringArray("sprite")]
 script = ExtResource("8_gabx1")
 min_angle = -45.0
@@ -206,6 +226,24 @@ script = ExtResource("8_gabx1")
 min_angle = -35.0
 max_angle = 45.0
 sprite = NodePath("..")
+
+[node name="Muzzle1" type="Marker2D" parent="right_arm"]
+position = Vector2(355, 4)
+
+[node name="Weapon1" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle")]
+script = ExtResource("8_xvp7w")
+muzzle = NodePath("../Muzzle1")
+rate_of_fire = 0.2
+Bullet = ExtResource("2_5upe2")
+
+[node name="Muzzle2" type="Marker2D" parent="right_arm"]
+position = Vector2(355, 56)
+
+[node name="Weapon2" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle")]
+script = ExtResource("8_xvp7w")
+muzzle = NodePath("../Muzzle2")
+rate_of_fire = 0.2
+Bullet = ExtResource("2_5upe2")
 
 [node name="torso" type="Sprite2D" parent="."]
 position = Vector2(-3, 2)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dolcc44gunbe1"]
+[gd_scene load_steps=7 format=3 uid="uid://dolcc44gunbe1"]
 
 [ext_resource type="Texture2D" uid="uid://bmwv2qdkdyayw" path="res://res/sprites/bot/floor_tile.png" id="1_4thkr"]
 [ext_resource type="PackedScene" uid="uid://cpj8sk7bs5eou" path="res://player.tscn" id="2_ht55r"]
+[ext_resource type="Texture2D" uid="uid://bmhrc7bc0x4f1" path="res://res/sprites/bot/crate.png" id="3_cs38w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ie3hy"]
 texture = ExtResource("1_4thkr")
@@ -21,6 +22,9 @@ tile_size = Vector2i(64, 64)
 uv_clipping = true
 sources/0 = SubResource("TileSetAtlasSource_ie3hy")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrujo"]
+size = Vector2(392.05, 396.007)
+
 [node name="Main" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -31,3 +35,15 @@ layer_0/tile_data = PackedInt32Array(131068, 65536, 2, 196604, 65536, 0, 262140,
 
 [node name="Player" parent="." instance=ExtResource("2_ht55r")]
 position = Vector2(1048, 1294)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(1979, 1361.5)
+rotation = -0.69053
+mass = 100.0
+
+[node name="Crate" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(-0.351501, -7.42456)
+texture = ExtResource("3_cs38w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_mrujo")
