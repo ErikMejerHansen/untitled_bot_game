@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ClampedRotationNode" load_steps=2 format=3 uid="uid://prve7pxtb4h3"]
+
+[ext_resource type="Script" path="res://components/clamped_rotation.gd" id="1_n5m2k"]
+
+[resource]
+script = ExtResource("1_n5m2k")
+min_angle = 0.0
+max_angle = 0.0

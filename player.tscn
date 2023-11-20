@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=12 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://res/sprites/bot/Torso.png" id="1_a7nsw"]
@@ -6,18 +6,76 @@
 [ext_resource type="Texture2D" uid="uid://umv3ece2nqil" path="res://res/sprites/bot/right_foot.png" id="2_0yd6b"]
 [ext_resource type="Texture2D" uid="uid://coe0e3eria5od" path="res://res/sprites/bot/left_armament.png" id="3_iu60i"]
 [ext_resource type="Texture2D" uid="uid://bbap885k80uf6" path="res://res/sprites/bot/right_armament.png" id="4_e1rui"]
-[ext_resource type="Script" path="res://left_arm.gd" id="5_ceo6o"]
-[ext_resource type="Script" path="res://right_arm.gd" id="7_2764x"]
+[ext_resource type="Script" path="res://components/clamped_rotation.gd" id="8_gabx1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
 size = Vector2(1068, 531)
 
+[sub_resource type="Animation" id="Animation_qwcw6"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_foot:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-33, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("left_foot:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-271, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_rbn0a"]
+resource_name = "rotate_clockwise"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_foot:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-72, -0.25, 0, 0.25, 0, -33, -0.25, 0, 0.25, 0, -72, -0.25, 0, 0.25, 0, -148, -0.25, 0, 0.25, 0, -72, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2, 3, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("left_foot:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-271, -0.25, 0, 0.25, 0, -271, -0.25, 0, 0.25, 0, -271, -0.25, 0, 0.25, 0, -271, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(1, 2, 3, 4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0b2fb"]
+_data = {
+"RESET": SubResource("Animation_qwcw6"),
+"rotate_clockwise": SubResource("Animation_rbn0a")
+}
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(149, -114)
+motion_mode = 1
 script = ExtResource("1_8pc4r")
 
 [node name="left_foot" type="Sprite2D" parent="."]
-position = Vector2(-72, -271)
+position = Vector2(-33, -271)
 texture = ExtResource("1_hl5vg")
 
 [node name="right_foot" type="Sprite2D" parent="."]
@@ -28,13 +86,23 @@ texture = ExtResource("2_0yd6b")
 position = Vector2(-84, -437)
 texture = ExtResource("3_iu60i")
 offset = Vector2(172, -22)
-script = ExtResource("5_ceo6o")
+
+[node name="RotationClamp" type="Node" parent="left_arm" node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_gabx1")
+min_angle = -45.0
+max_angle = 35.0
+sprite = NodePath("..")
 
 [node name="right_arm" type="Sprite2D" parent="."]
 position = Vector2(-84, 441)
 texture = ExtResource("4_e1rui")
 offset = Vector2(169, 25)
-script = ExtResource("7_2764x")
+
+[node name="RotationClamp" type="Node" parent="right_arm" node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_gabx1")
+min_angle = -35.0
+max_angle = 45.0
+sprite = NodePath("..")
 
 [node name="torso" type="Sprite2D" parent="."]
 position = Vector2(-3, 2)
@@ -45,5 +113,10 @@ position = Vector2(-2.5, 5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_s130o")
 
-[connection signal="arm_rotation_clamp" from="left_arm" to="." method="_on_arm_rotation_clamp"]
-[connection signal="arm_rotation_clamp" from="right_arm" to="." method="_on_arm_rotation_clamp"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0b2fb")
+}
+
+[connection signal="rotation_clamped" from="left_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
+[connection signal="rotation_clamped" from="right_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
