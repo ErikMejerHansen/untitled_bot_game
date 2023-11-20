@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 100.0
 const ROTATE_SPEED = 0.7
 
 var rotate_clockwise = false
@@ -21,6 +21,11 @@ func _physics_process(delta):
 	var movement_direction = input_direction.rotated(rotation)
 
 	velocity = movement_direction * SPEED
+	
+	if(input_direction.x > 0):
+		$AnimationPlayer.play("forward")
+	if(input_direction.x < 0):
+		$AnimationPlayer.play_backwards("forward")
 	
 	move_and_slide()
 

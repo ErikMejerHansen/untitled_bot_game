@@ -11,7 +11,77 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
 size = Vector2(1068, 531)
 
-[sub_resource type="Animation" id="Animation_qwcw6"]
+[sub_resource type="Animation" id="Animation_61avl"]
+resource_name = "forward"
+length = 10.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_foot:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0, -55, -0.25, 0, 0.25, 0, -23, -0.25, 0, 0.25, 0, -55, -0.25, 0, 0.25, 0, -97, -0.25, 0, 0.25, 0, -97, -0.25, 0, 0.25, 0, -55, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1.4, 2.2, 2.8, 3.5, 4.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("left_foot:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.07832, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.07, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1.4, 2.2, 2.8, 3.5, 4.4)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("left_foot:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.07832, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.07, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1.4, 2.2, 2.8, 3.5, 4.4)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("right_foot:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0, -55, -0.25, 0, 0.25, 0, -55, -0.25, 0, 0.25, 0, -23, -0.25, 0, 0.25, 0, -97, -0.25, 0, 0.25, 0, -97, -0.25, 0, 0.25, 0, -55, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 4.4, 5.2, 6, 8, 9, 10)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("right_foot:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.07, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.07, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 4.4, 5.2, 6, 8, 9, 10)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("right_foot:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.07, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.07, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 4.4, 5.2, 6, 8, 9, 10)
+}
+
+[sub_resource type="Animation" id="Animation_iwlxo"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -21,52 +91,69 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-33, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("left_foot:position:y")
+tracks/1/path = NodePath("left_foot:scale:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-271, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-
-[sub_resource type="Animation" id="Animation_rbn0a"]
-resource_name = "rotate_clockwise"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("left_foot:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(-72, -0.25, 0, 0.25, 0, -33, -0.25, 0, 0.25, 0, -72, -0.25, 0, 0.25, 0, -148, -0.25, 0, 0.25, 0, -72, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2, 3, 4)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("left_foot:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("left_foot:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(-271, -0.25, 0, 0.25, 0, -271, -0.25, 0, 0.25, 0, -271, -0.25, 0, 0.25, 0, -271, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1, 2, 3, 4)
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("right_foot:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("right_foot:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("right_foot:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0b2fb"]
 _data = {
-"RESET": SubResource("Animation_qwcw6"),
-"rotate_clockwise": SubResource("Animation_rbn0a")
+"RESET": SubResource("Animation_iwlxo"),
+"forward": SubResource("Animation_61avl")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -75,12 +162,14 @@ motion_mode = 1
 script = ExtResource("1_8pc4r")
 
 [node name="left_foot" type="Sprite2D" parent="."]
-position = Vector2(-33, -271)
+position = Vector2(-55, -271)
 texture = ExtResource("1_hl5vg")
+metadata/_edit_group_ = true
 
 [node name="right_foot" type="Sprite2D" parent="."]
 position = Vector2(-55, 289)
 texture = ExtResource("2_0yd6b")
+metadata/_edit_group_ = true
 
 [node name="left_arm" type="Sprite2D" parent="."]
 position = Vector2(-84, -437)
@@ -114,9 +203,13 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_s130o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 4.0
 libraries = {
 "": SubResource("AnimationLibrary_0b2fb")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
 
 [connection signal="rotation_clamped" from="left_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
 [connection signal="rotation_clamped" from="right_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
