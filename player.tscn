@@ -198,7 +198,7 @@ position = Vector2(355, -51)
 [node name="Weapon3" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle")]
 script = ExtResource("8_xvp7w")
 muzzle = NodePath("../Muzzle3")
-rate_of_fire = 0.1
+rate_of_fire = 0.2
 Bullet = ExtResource("2_5upe2")
 
 [node name="Muzzle4" type="Marker2D" parent="left_arm"]
