@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=17 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://res/sprites/bot/Torso.png" id="1_a7nsw"]
@@ -10,9 +10,79 @@
 [ext_resource type="Script" path="res://components/clamped_rotation.gd" id="8_gabx1"]
 [ext_resource type="Texture2D" uid="uid://c4t7wywcp0vko" path="res://res/sprites/bot/smoke_puff.png" id="8_nv2u1"]
 [ext_resource type="Script" path="res://components/weapon.gd" id="8_xvp7w"]
+[ext_resource type="Texture2D" uid="uid://cssoa3praeucj" path="res://res/sprites/bot/muzzle_flash.png" id="9_dqbou"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
 size = Vector2(1068, 531)
+
+[sub_resource type="Animation" id="Animation_iwlxo"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("left_foot:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("left_foot:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("left_foot:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("right_foot:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("right_foot:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("right_foot:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_61avl"]
 resource_name = "forward"
@@ -84,75 +154,6 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 4.4, 5.2, 6, 8, 9, 10)
 }
 
-[sub_resource type="Animation" id="Animation_iwlxo"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("left_foot:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("left_foot:scale:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("left_foot:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("right_foot:position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-55, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("right_foot:scale:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("right_foot:scale:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0b2fb"]
 _data = {
 "RESET": SubResource("Animation_iwlxo"),
@@ -192,29 +193,35 @@ position = Vector2(-84, -437)
 texture = ExtResource("3_iu60i")
 offset = Vector2(172, -22)
 
-[node name="Muzzle3" type="Marker2D" parent="left_arm"]
-position = Vector2(355, -51)
-
-[node name="Weapon3" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle")]
-script = ExtResource("8_xvp7w")
-muzzle = NodePath("../Muzzle3")
-rate_of_fire = 0.2
-Bullet = ExtResource("2_5upe2")
-
-[node name="Muzzle4" type="Marker2D" parent="left_arm"]
-position = Vector2(355, 3)
-
-[node name="Weapon4" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle")]
-script = ExtResource("8_xvp7w")
-muzzle = NodePath("../Muzzle4")
-rate_of_fire = 0.2
-Bullet = ExtResource("2_5upe2")
-
 [node name="RotationClamp" type="Node" parent="left_arm" node_paths=PackedStringArray("sprite")]
 script = ExtResource("8_gabx1")
 min_angle = -45.0
 max_angle = 35.0
 sprite = NodePath("..")
+
+[node name="Muzzle3" type="Marker2D" parent="left_arm"]
+position = Vector2(355, -51)
+
+[node name="Weapon3" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("8_xvp7w")
+muzzle = NodePath("../Muzzle3")
+rate_of_fire = 0.2
+Bullet = ExtResource("2_5upe2")
+muzzle_flash = NodePath("../MuzzleFlash")
+
+[node name="Muzzle4" type="Marker2D" parent="left_arm"]
+position = Vector2(355, 3)
+
+[node name="Weapon4" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("8_xvp7w")
+muzzle = NodePath("../Muzzle4")
+rate_of_fire = 0.2
+Bullet = ExtResource("2_5upe2")
+muzzle_flash = NodePath("../MuzzleFlash")
+
+[node name="MuzzleFlash" type="Sprite2D" parent="left_arm"]
+position = Vector2(297, -23)
+texture = ExtResource("9_dqbou")
 
 [node name="right_arm" type="Sprite2D" parent="."]
 position = Vector2(-84, 441)
@@ -230,20 +237,26 @@ sprite = NodePath("..")
 [node name="Muzzle1" type="Marker2D" parent="right_arm"]
 position = Vector2(355, 4)
 
-[node name="Weapon1" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle")]
+[node name="Weapon1" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
 script = ExtResource("8_xvp7w")
 muzzle = NodePath("../Muzzle1")
 rate_of_fire = 0.2
 Bullet = ExtResource("2_5upe2")
+muzzle_flash = NodePath("../MuzzleFlash")
 
 [node name="Muzzle2" type="Marker2D" parent="right_arm"]
 position = Vector2(355, 56)
 
-[node name="Weapon2" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle")]
+[node name="Weapon2" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
 script = ExtResource("8_xvp7w")
 muzzle = NodePath("../Muzzle2")
 rate_of_fire = 0.2
 Bullet = ExtResource("2_5upe2")
+muzzle_flash = NodePath("../MuzzleFlash")
+
+[node name="MuzzleFlash" type="Sprite2D" parent="right_arm"]
+position = Vector2(293, 26)
+texture = ExtResource("9_dqbou")
 
 [node name="torso" type="Sprite2D" parent="."]
 position = Vector2(-3, 2)
@@ -261,7 +274,7 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.3, 0.3)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(-211, 145)

@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4cnpky6de1c2"]
+
+[ext_resource type="Script" path="res://props/Crate.gd" id="1_3j3ew"]
+[ext_resource type="Texture2D" uid="uid://bmhrc7bc0x4f1" path="res://res/sprites/bot/crate.png" id="2_yxq44"]
+[ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="3_cf21b"]
+[ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="4_g44a6"]
+[ext_resource type="PackedScene" uid="uid://5ryct63g32to" path="res://effects/wood_fragments.tscn" id="5_rkawg"]
+[ext_resource type="PackedScene" uid="uid://bja36penelhi0" path="res://effects/wood_fragments_explosion.tscn" id="6_7rvl8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1evdp"]
+size = Vector2(391, 394)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_berya"]
+size = Vector2(428, 430)
+
+[node name="Crate" type="RigidBody2D"]
+position = Vector2(1979, 1362)
+mass = 100.0
+script = ExtResource("1_3j3ew")
+on_destruction_effect = ExtResource("6_7rvl8")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, -1)
+scale = Vector2(0.7, 0.7)
+shape = SubResource("RectangleShape2D_1evdp")
+
+[node name="Crate" type="Sprite2D" parent="."]
+position = Vector2(-0.351501, -7.42456)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_yxq44")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_cf21b")]
+MAX_HEALTH = 300
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_g44a6")]
+scale = Vector2(0.7, 0.7)
+health_component = NodePath("../HealthComponent")
+hit_effect = ExtResource("5_rkawg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_berya")
+
+[connection signal="die" from="HealthComponent" to="." method="_on_die"]

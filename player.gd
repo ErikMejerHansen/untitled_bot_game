@@ -21,7 +21,7 @@ func _physics_process(delta):
 		
 	var input_direction = Input.get_vector("backward", "forward", "left", "right")
 	var movement_direction = input_direction.rotated(rotation)
-
+	
 	velocity = movement_direction * SPEED
 	
 	if(input_direction.x > 0):
