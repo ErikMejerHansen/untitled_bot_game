@@ -15,8 +15,15 @@ func _process(_delta):
 func _physics_process(delta):
 	position += transform.x * SPEED * delta
 
+
+
 func _on_area_entered(area):
 	if area is HitboxComponent:
 		var hitbox: HitboxComponent = area
 		hitbox.damage(damage, global_position)
+		queue_free()
+
+
+func _on_body_entered(body):
+	if not body.is_in_group("player"):
 		queue_free()
