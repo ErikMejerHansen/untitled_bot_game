@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://coxmddbc5y7vj"]
+
+[ext_resource type="Texture2D" uid="uid://cgq83xpunkdvi" path="res://res/sprites/bot/spark@0.5x.png" id="1_hc0r3"]
+[ext_resource type="Script" path="res://effects/hard_surface_sparks.gd" id="2_j16va"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m34ns"]
+lifetime_randomness = 0.45
+particle_flag_disable_z = true
+spread = 90.0
+gravity = Vector3(1, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 166.25
+initial_velocity_max = 322.59
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.1
+scale_max = 0.2
+
+[node name="HardSurfaceSparks" type="GPUParticles2D"]
+position = Vector2(1714, 1394)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_m34ns")
+texture = ExtResource("1_hc0r3")
+lifetime = 0.4
+one_shot = true
+speed_scale = 2.24
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.01
+trail_sections = 2
+trail_section_subdivisions = 1
+script = ExtResource("2_j16va")
