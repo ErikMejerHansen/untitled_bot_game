@@ -3,6 +3,7 @@ extends Area2D
 
 @export var health_component: HealthComponent
 @export var hit_effect: PackedScene
+@export var impact_component: ImpactComponent
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,14 +17,12 @@ func _process(_delta):
 func damage(amount, hit_location):
 	if health_component:
 		health_component.damage(amount)
+		
+	if impact_component:
+		impact_component.hit(hit_location)
 	
 	if hit_effect:
 		var effect = hit_effect.instantiate()
 		add_child(effect)
 		effect.global_position = hit_location
 		effect.restart()
-		
-#		if not area.is_in_group("player"):
-#		$BulletSprite.hide()
-#		$Fragments.restart()
-#		await get_tree().create_timer($Fragments.lifetime).timeout

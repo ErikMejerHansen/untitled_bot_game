@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 100.0
-const ROTATE_SPEED = 0.7
+@export var SPEED = 100.0
+@export var ROTATE_SPEED = 0.7
 
 var rotate_clockwise = false
 var rotate_counter_clockwise = false

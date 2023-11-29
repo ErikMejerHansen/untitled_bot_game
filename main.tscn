@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dolcc44gunbe1"]
+[gd_scene load_steps=7 format=3 uid="uid://dolcc44gunbe1"]
 
 [ext_resource type="Texture2D" uid="uid://0stnne8q378a" path="res://res/sprites/bot/tile_map.png" id="1_oscmn"]
 [ext_resource type="PackedScene" uid="uid://cpj8sk7bs5eou" path="res://player.tscn" id="2_ht55r"]
 [ext_resource type="PackedScene" uid="uid://b4cnpky6de1c2" path="res://props/Crate.tscn" id="3_ia1bv"]
+[ext_resource type="PackedScene" uid="uid://cy6seo05bukma" path="res://enemy_drone.tscn" id="4_qwyap"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oau1a"]
 texture = ExtResource("1_oscmn")
@@ -109,9 +110,10 @@ metadata/_edit_group_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_ht55r")]
 position = Vector2(1048, 1294)
+SPEED = 400.0
 
 [node name="Crate" parent="." instance=ExtResource("3_ia1bv")]
-position = Vector2(2162, 1075)
+position = Vector2(1709, 651)
 
 [node name="Crate3" parent="." instance=ExtResource("3_ia1bv")]
 position = Vector2(3049, 979)
@@ -120,4 +122,7 @@ position = Vector2(3049, 979)
 position = Vector2(2507, 1653)
 
 [node name="Crate4" parent="." instance=ExtResource("3_ia1bv")]
-position = Vector2(1812, 1944)
+position = Vector2(1810, 1944)
+
+[node name="EnemyDrone" parent="." instance=ExtResource("4_qwyap")]
+position = Vector2(2426, 1214)

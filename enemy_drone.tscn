@@ -1,0 +1,128 @@
+[gd_scene load_steps=13 format=3 uid="uid://cy6seo05bukma"]
+
+[ext_resource type="Script" path="res://EnemyDrone.gd" id="1_tlhve"]
+[ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://res/sprites/bot/drone_shadow.png" id="2_5akrv"]
+[ext_resource type="Texture2D" uid="uid://bp3u8x1ur6h2a" path="res://res/sprites/bot/drone_gun.png" id="3_3jswc"]
+[ext_resource type="Texture2D" uid="uid://bcbmvfs6l15bn" path="res://res/sprites/bot/Drone.png" id="4_egngk"]
+[ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="5_2t7q2"]
+[ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
+[ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]
+
+[sub_resource type="Animation" id="Animation_hllq1"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0698132, 0.0523599]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 1.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, -5), Vector2(2.08165e-12, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_xu4mr"]
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k8jdy"]
+_data = {
+"RESET": SubResource("Animation_xu4mr"),
+"idle": SubResource("Animation_hllq1")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x2rme"]
+radius = 143.422
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w4n0x"]
+radius = 147.014
+
+[node name="EnemyDrone" type="CharacterBody2D"]
+position = Vector2(1391, 1202)
+motion_mode = 1
+script = ExtResource("1_tlhve")
+
+[node name="DroneShadow" type="Sprite2D" parent="."]
+position = Vector2(120.5, 275.5)
+scale = Vector2(1, 1)
+texture = ExtResource("2_5akrv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k8jdy")
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="Gun1" type="Sprite2D" parent="Node2D"]
+position = Vector2(132.5, -83.5001)
+scale = Vector2(1, 1)
+texture = ExtResource("3_3jswc")
+
+[node name="Gun2" type="Sprite2D" parent="Node2D"]
+position = Vector2(132.5, 81.4999)
+scale = Vector2(1, 1)
+texture = ExtResource("3_3jswc")
+
+[node name="MainBody" type="Sprite2D" parent="Node2D"]
+scale = Vector2(1, 1)
+texture = ExtResource("4_egngk")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_2t7q2")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+health_component = NodePath("../HealthComponent")
+hit_effect = ExtResource("6_yj1i6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_x2rme")
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_i56ju")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+MAX_HEALTH = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+shape = SubResource("CircleShape2D_w4n0x")
+
+[connection signal="die" from="HealthComponent" to="." method="_on_die"]

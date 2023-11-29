@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4cnpky6de1c2"]
+[gd_scene load_steps=10 format=3 uid="uid://b4cnpky6de1c2"]
 
 [ext_resource type="Script" path="res://props/Crate.gd" id="1_3j3ew"]
 [ext_resource type="Texture2D" uid="uid://bmhrc7bc0x4f1" path="res://res/sprites/bot/crate.png" id="2_yxq44"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="4_g44a6"]
 [ext_resource type="PackedScene" uid="uid://5ryct63g32to" path="res://effects/wood_fragments.tscn" id="5_rkawg"]
 [ext_resource type="PackedScene" uid="uid://bja36penelhi0" path="res://effects/wood_fragments_explosion.tscn" id="6_7rvl8"]
+[ext_resource type="PackedScene" uid="uid://cfetw25o1ljvq" path="res://components/impact_component.tscn" id="7_kk5cx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1evdp"]
 size = Vector2(391, 394)
@@ -16,6 +17,8 @@ size = Vector2(428, 430)
 [node name="Crate" type="RigidBody2D"]
 position = Vector2(1979, 1362)
 mass = 100.0
+linear_damp = 2.0
+angular_damp = 2.0
 script = ExtResource("1_3j3ew")
 on_destruction_effect = ExtResource("6_7rvl8")
 
@@ -32,13 +35,16 @@ texture = ExtResource("2_yxq44")
 [node name="HealthComponent" parent="." instance=ExtResource("3_cf21b")]
 MAX_HEALTH = 300
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_g44a6")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "impact_component") instance=ExtResource("4_g44a6")]
 scale = Vector2(0.7, 0.7)
 health_component = NodePath("../HealthComponent")
 hit_effect = ExtResource("5_rkawg")
+impact_component = NodePath("../ImpactComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_berya")
+
+[node name="ImpactComponent" parent="." instance=ExtResource("7_kk5cx")]
 
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
