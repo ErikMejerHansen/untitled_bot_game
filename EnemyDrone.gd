@@ -11,5 +11,5 @@ func _draw():
 	$DroneShadow.global_position = global_position + DROP_SHADOW_OFFSET.rotated(rotation)
 	
 	
-func _on_die():
+func _on_die(_damage_source: Node2D):
 	queue_free()

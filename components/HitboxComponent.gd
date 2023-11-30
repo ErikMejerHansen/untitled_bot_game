@@ -16,7 +16,7 @@ func _process(_delta):
 
 func damage(amount, bullet: Bullet):
 	if health_component:
-		health_component.damage(amount)
+		health_component.damage(amount, bullet)
 		
 	if impact_component:
 		impact_component.hit(bullet)

@@ -11,12 +11,13 @@ func _ready():
 func _process(_delta):
 	pass
 
-func _on_die():
+func _on_die(damage_source: Node2D):
+	
 	var effect = on_destruction_effect.instantiate()
 	effect.global_position = global_position
-	# TODO This should be from away from the hit location
-	# the angle of a vector pointing from hit_location to origin of the crate
-	effect.rotate(linear_velocity.angle())
+	
+	var x = global_position - damage_source.global_position		
+	effect.rotate(x.angle())
 	
 	get_parent().add_child(effect)
 	effect.restart()

@@ -1,7 +1,7 @@
 class_name HealthComponent
 extends Node2D
 
-signal die
+signal die(bullet: Bullet)
 
 
 @export var MAX_HEALTH := 100
@@ -11,7 +11,7 @@ func _ready():
 	health = MAX_HEALTH
 
 
-func damage(attack: int):
+func damage(attack: int, bullet: Bullet):
 	health -= attack
 	if health <= 0:
-		die.emit()
+		die.emit(bullet)
