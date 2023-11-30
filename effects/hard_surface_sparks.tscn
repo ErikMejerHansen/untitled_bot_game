@@ -7,11 +7,9 @@
 lifetime_randomness = 0.45
 particle_flag_disable_z = true
 spread = 90.0
-gravity = Vector3(1, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 166.25
 initial_velocity_max = 322.59
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(1, 2.08165e-12, 2.08165e-12)
 scale_min = 0.1
 scale_max = 0.2
 

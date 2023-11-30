@@ -1,34 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://bja36penelhi0"]
+[gd_scene load_steps=6 format=3 uid="uid://bja36penelhi0"]
 
 [ext_resource type="Texture2D" uid="uid://csrjncf7u8j8e" path="res://res/sprites/bot/splinters.png" id="1_83c1x"]
 [ext_resource type="Script" path="res://effects/wood_fragments_explosion.gd" id="2_t1m41"]
 
+[sub_resource type="Curve" id="Curve_88euc"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0.0101523, 104.546), 0.0, -419.089, 0, 0, Vector2(0.25, 1.32336), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tn04h"]
+curve = SubResource("Curve_88euc")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2181w"]
+particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 100.0
 emission_ring_radius = 175.0
 emission_ring_inner_radius = 175.0
-particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
 direction = Vector3(1, 2.08165e-12, 2.08165e-12)
 spread = 70.0
 flatness = 0.61
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 625.25
 initial_velocity_max = 625.25
 angular_velocity_min = -600.0
 angular_velocity_max = 600.0
 orbit_velocity_min = 2.08167e-14
 orbit_velocity_max = 2.08167e-14
-linear_accel_min = 100.0
-linear_accel_max = 100.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+linear_accel_min = 400.0
+linear_accel_max = 400.0
+linear_accel_curve = SubResource("CurveTexture_tn04h")
 radial_accel_min = 100.0
 radial_accel_max = 100.0
 tangential_accel_min = 100.0
 tangential_accel_max = 100.0
 damping_max = 24.917
-angle_min = -720.0
-angle_max = 720.0
 scale_min = 0.8
 scale_max = 1.5
 

@@ -8,6 +8,34 @@
 [ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]
 
+[sub_resource type="Animation" id="Animation_xu4mr"]
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_hllq1"]
 resource_name = "idle"
 length = 3.0
@@ -37,34 +65,6 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(2.08165e-12, -5), Vector2(2.08165e-12, 7)]
 }
 
-[sub_resource type="Animation" id="Animation_xu4mr"]
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k8jdy"]
 _data = {
 "RESET": SubResource("Animation_xu4mr"),
@@ -87,7 +87,6 @@ script = ExtResource("1_tlhve")
 
 [node name="DroneShadow" type="Sprite2D" parent="."]
 position = Vector2(120, 275)
-scale = Vector2(1, 1)
 texture = ExtResource("2_5akrv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -96,20 +95,16 @@ libraries = {
 }
 
 [node name="Node2D" type="Node2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="Gun1" type="Sprite2D" parent="Node2D"]
 position = Vector2(99.7147, -119.972)
-scale = Vector2(1, 1)
 texture = ExtResource("3_3jswc")
 
 [node name="Gun2" type="Sprite2D" parent="Node2D"]
 position = Vector2(100.288, 120.036)
-scale = Vector2(1, 1)
 texture = ExtResource("3_3jswc")
 
 [node name="MainBody" type="Sprite2D" parent="Node2D"]
-scale = Vector2(1, 1)
 texture = ExtResource("4_egngk")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_2t7q2")]

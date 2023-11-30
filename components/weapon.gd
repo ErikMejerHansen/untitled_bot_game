@@ -4,7 +4,7 @@ extends Node
 
 @export var muzzle: Marker2D
 @export var rate_of_fire: float
-@export var Bullet: PackedScene
+@export var bullet: PackedScene
 @export var muzzle_flash: Sprite2D
 
 var can_fire = true
@@ -25,7 +25,7 @@ func shoot():
 	if can_fire:
 		muzzle_flash.show()
 		can_fire = false
-		var b = Bullet.instantiate()
+		var b = bullet.instantiate()
 		get_tree().get_root().add_child(b)
 		b.transform = muzzle.global_transform
 		await get_tree().create_timer(rate_of_fire).timeout
