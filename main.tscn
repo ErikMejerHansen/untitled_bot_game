@@ -110,7 +110,7 @@ metadata/_edit_group_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_ht55r")]
 position = Vector2(1048, 1294)
-SPEED = 400.0
+SPEED = 350.0
 
 [node name="Crate" parent="." instance=ExtResource("3_ia1bv")]
 position = Vector2(1709, 651)

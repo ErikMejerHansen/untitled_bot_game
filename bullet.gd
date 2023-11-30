@@ -22,7 +22,7 @@ func _physics_process(delta):
 func _on_area_entered(area):
 	if area is HitboxComponent:
 		var hitbox: HitboxComponent = area
-		hitbox.damage(damage, global_position)
+		hitbox.damage(damage, self)
 		queue_free()
 
 

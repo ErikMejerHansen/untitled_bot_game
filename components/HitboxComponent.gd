@@ -14,15 +14,15 @@ func _ready():
 func _process(_delta):
 	pass
 
-func damage(amount, hit_location):
+func damage(amount, bullet: Bullet):
 	if health_component:
 		health_component.damage(amount)
 		
 	if impact_component:
-		impact_component.hit(hit_location)
+		impact_component.hit(bullet)
 	
 	if hit_effect:
 		var effect = hit_effect.instantiate()
 		add_child(effect)
-		effect.global_position = hit_location
+		effect.global_position = bullet.global_position
 		effect.restart()

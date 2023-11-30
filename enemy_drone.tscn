@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=14 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://res/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -77,13 +77,16 @@ radius = 143.422
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4n0x"]
 radius = 147.014
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kyt42"]
+radius = 1200.0
+
 [node name="EnemyDrone" type="CharacterBody2D"]
 position = Vector2(1391, 1202)
 motion_mode = 1
 script = ExtResource("1_tlhve")
 
 [node name="DroneShadow" type="Sprite2D" parent="."]
-position = Vector2(120.5, 275.5)
+position = Vector2(120, 275)
 scale = Vector2(1, 1)
 texture = ExtResource("2_5akrv")
 
@@ -96,12 +99,12 @@ libraries = {
 scale = Vector2(1, 1)
 
 [node name="Gun1" type="Sprite2D" parent="Node2D"]
-position = Vector2(132.5, -83.5001)
+position = Vector2(99.7147, -119.972)
 scale = Vector2(1, 1)
 texture = ExtResource("3_3jswc")
 
 [node name="Gun2" type="Sprite2D" parent="Node2D"]
-position = Vector2(132.5, 81.4999)
+position = Vector2(100.288, 120.036)
 scale = Vector2(1, 1)
 texture = ExtResource("3_3jswc")
 
@@ -124,5 +127,11 @@ MAX_HEALTH = 400
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
 shape = SubResource("CircleShape2D_w4n0x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_kyt42")
+debug_color = Color(0.878431, 0.333333, 0.180392, 0.419608)
 
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
