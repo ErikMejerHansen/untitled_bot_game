@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bywyjnuymwcq0"]
+
+[ext_resource type="Texture2D" uid="uid://c1sdhg5tgm8np" path="res://res/sprites/bot/blue_light_strip.png" id="1_7owns"]
+[ext_resource type="Texture2D" uid="uid://ce418fsa1yrpe" path="res://res/sprites/bot/blue_light_strip_light_mask.png" id="2_3jxwd"]
+
+[node name="BlueLightGrate" type="Sprite2D"]
+position = Vector2(3813, 1120)
+texture = ExtResource("1_7owns")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-2.00001, 10.4998)
+scale = Vector2(1.434, 2.4217)
+color = Color(0, 0.392157, 0.494118, 1)
+texture = ExtResource("2_3jxwd")
+texture_scale = 0.4
