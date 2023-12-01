@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=18 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://res/sprites/bot/Torso.png" id="1_a7nsw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c4t7wywcp0vko" path="res://res/sprites/bot/smoke_puff.png" id="8_nv2u1"]
 [ext_resource type="Script" path="res://components/weapon.gd" id="8_xvp7w"]
 [ext_resource type="Texture2D" uid="uid://cssoa3praeucj" path="res://res/sprites/bot/muzzle_flash.png" id="9_dqbou"]
+[ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://res/2d_lights_and_shadows_neutral_point_light.webp" id="9_tnptp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
 size = Vector2(1068, 531)
@@ -235,6 +236,12 @@ turbulence_noise_strength = 1.84
 position = Vector2(159, -114)
 motion_mode = 1
 script = ExtResource("1_8pc4r")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.19
+shadow_enabled = true
+texture = ExtResource("9_tnptp")
+texture_scale = 16.86
 
 [node name="left_foot" type="Sprite2D" parent="."]
 position = Vector2(-14, -271)

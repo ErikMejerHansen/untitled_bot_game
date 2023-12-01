@@ -31,3 +31,5 @@ func shoot():
 		await get_tree().create_timer(rate_of_fire).timeout
 		can_fire = true
 		muzzle_flash.hide()
+	
+	

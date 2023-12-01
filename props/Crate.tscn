@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4cnpky6de1c2"]
+[gd_scene load_steps=11 format=3 uid="uid://b4cnpky6de1c2"]
 
 [ext_resource type="Script" path="res://props/Crate.gd" id="1_3j3ew"]
 [ext_resource type="Texture2D" uid="uid://bmhrc7bc0x4f1" path="res://res/sprites/bot/crate.png" id="2_yxq44"]
@@ -13,6 +13,9 @@ size = Vector2(391, 394)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_berya"]
 size = Vector2(428, 430)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w1er6"]
+polygon = PackedVector2Array(-137, -139, 139, -140, 139, 137, -138, 135)
 
 [node name="Crate" type="RigidBody2D"]
 position = Vector2(1979, 1362)
@@ -47,5 +50,9 @@ shape = SubResource("RectangleShape2D_berya")
 
 [node name="ImpactComponent" parent="." instance=ExtResource("7_kk5cx")]
 impact_force = 10000
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+occluder = SubResource("OccluderPolygon2D_w1er6")
 
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
