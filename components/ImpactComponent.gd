@@ -10,6 +10,3 @@ func hit(bullet: Bullet):
 	var pos = bullet.global_position - p.global_position
 	p.apply_impulse(push_back * impact_force, pos)
 	
-#	var parent: RigidBody2D = get_parent()
-	# This is bad
-#	parent.apply_impulse(Vector2(1,0).rotated(location.angle()) * 400, location)
