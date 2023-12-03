@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcbmvfs6l15bn"
-path="res://.godot/imported/Drone.png-1acce05a605d68dcac582c465401609c.ctex"
+uid="uid://bmhrc7bc0x4f1"
+path="res://.godot/imported/crate.png-161d63a5f73cd4a39aeca5ec86f8300c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/Drone.png"
-dest_files=["res://.godot/imported/Drone.png-1acce05a605d68dcac582c465401609c.ctex"]
+source_file="res://sprites/sprites/bot/crate.png"
+dest_files=["res://.godot/imported/crate.png-161d63a5f73cd4a39aeca5ec86f8300c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cssoa3praeucj"
-path="res://.godot/imported/muzzle_flash.png-6a9abda247a75e88a14d68d3d5cda848.ctex"
+uid="uid://cgq83xpunkdvi"
+path="res://.godot/imported/spark@0.5x.png-ca50612aaebca888b0b147a7b5672577.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/muzzle_flash.png"
-dest_files=["res://.godot/imported/muzzle_flash.png-6a9abda247a75e88a14d68d3d5cda848.ctex"]
+source_file="res://sprites/sprites/bot/spark@0.5x.png"
+dest_files=["res://.godot/imported/spark@0.5x.png-ca50612aaebca888b0b147a7b5672577.ctex"]
 
 [params]
 

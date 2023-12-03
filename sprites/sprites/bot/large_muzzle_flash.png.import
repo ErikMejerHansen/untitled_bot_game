@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4t7wywcp0vko"
-path="res://.godot/imported/smoke_puff.png-8aebdf7569403ab969831249ae705a3f.ctex"
+uid="uid://cv1kynbh5djqf"
+path="res://.godot/imported/large_muzzle_flash.png-c7f3cc0377c0619d12024582fe0ddbc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/smoke_puff.png"
-dest_files=["res://.godot/imported/smoke_puff.png-8aebdf7569403ab969831249ae705a3f.ctex"]
+source_file="res://sprites/sprites/bot/large_muzzle_flash.png"
+dest_files=["res://.godot/imported/large_muzzle_flash.png-c7f3cc0377c0619d12024582fe0ddbc1.ctex"]
 
 [params]
 

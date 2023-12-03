@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://coxmddbc5y7vj"]
 
-[ext_resource type="Texture2D" uid="uid://cgq83xpunkdvi" path="res://res/sprites/bot/spark@0.5x.png" id="1_hc0r3"]
+[ext_resource type="Texture2D" uid="uid://cgq83xpunkdvi" path="res://sprites/sprites/bot/spark@0.5x.png" id="1_hc0r3"]
 [ext_resource type="Script" path="res://effects/hard_surface_sparks.gd" id="2_j16va"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m34ns"]

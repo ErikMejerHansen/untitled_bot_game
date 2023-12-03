@@ -1,9 +1,9 @@
 [gd_scene load_steps=29 format=3 uid="uid://dolcc44gunbe1"]
 
-[ext_resource type="Texture2D" uid="uid://0stnne8q378a" path="res://res/sprites/bot/tile_map.png" id="1_oscmn"]
-[ext_resource type="PackedScene" uid="uid://cpj8sk7bs5eou" path="res://player.tscn" id="2_ht55r"]
+[ext_resource type="Texture2D" uid="uid://0stnne8q378a" path="res://sprites/sprites/bot/tile_map.png" id="1_oscmn"]
+[ext_resource type="PackedScene" uid="uid://cpj8sk7bs5eou" path="res://player/player.tscn" id="2_ht55r"]
 [ext_resource type="PackedScene" uid="uid://b4cnpky6de1c2" path="res://props/Crate.tscn" id="3_ia1bv"]
-[ext_resource type="PackedScene" uid="uid://cy6seo05bukma" path="res://enemy_drone.tscn" id="4_qwyap"]
+[ext_resource type="PackedScene" uid="uid://cy6seo05bukma" path="res://enemies/enemy_drone.tscn" id="4_qwyap"]
 [ext_resource type="PackedScene" uid="uid://bywyjnuymwcq0" path="res://props/blue_light_grate.tscn" id="5_fi17i"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uk4bm"]

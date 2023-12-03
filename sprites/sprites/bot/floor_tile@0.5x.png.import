@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coe0e3eria5od"
-path="res://.godot/imported/left_armament.png-dff26fea56fcc53fcaf80abcc3a3b892.ctex"
+uid="uid://b7x74rewqgqqw"
+path="res://.godot/imported/floor_tile@0.5x.png-47e791d9221889cdeab74fd7eb7c1190.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/left_armament.png"
-dest_files=["res://.godot/imported/left_armament.png-dff26fea56fcc53fcaf80abcc3a3b892.ctex"]
+source_file="res://sprites/sprites/bot/floor_tile@0.5x.png"
+dest_files=["res://.godot/imported/floor_tile@0.5x.png-47e791d9221889cdeab74fd7eb7c1190.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgq83xpunkdvi"
-path="res://.godot/imported/spark@0.5x.png-70174ff9ba41a06a233bf9d28d4b2275.ctex"
+uid="uid://it43llmi1s3k"
+path="res://.godot/imported/drone_shadow.png-6dd1f1039c0963459f7440768d2333df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/spark@0.5x.png"
-dest_files=["res://.godot/imported/spark@0.5x.png-70174ff9ba41a06a233bf9d28d4b2275.ctex"]
+source_file="res://sprites/sprites/bot/drone_shadow.png"
+dest_files=["res://.godot/imported/drone_shadow.png-6dd1f1039c0963459f7440768d2333df.ctex"]
 
 [params]
 

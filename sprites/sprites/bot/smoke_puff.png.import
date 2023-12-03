@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1sdhg5tgm8np"
-path="res://.godot/imported/blue_light_strip.png-d23b68f7544d17b965fd8e404e6d5f96.ctex"
+uid="uid://c4t7wywcp0vko"
+path="res://.godot/imported/smoke_puff.png-883b7c0608c388fbb26418ba3e84ccb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/blue_light_strip.png"
-dest_files=["res://.godot/imported/blue_light_strip.png-d23b68f7544d17b965fd8e404e6d5f96.ctex"]
+source_file="res://sprites/sprites/bot/smoke_puff.png"
+dest_files=["res://.godot/imported/smoke_puff.png-883b7c0608c388fbb26418ba3e84ccb2.ctex"]
 
 [params]
 

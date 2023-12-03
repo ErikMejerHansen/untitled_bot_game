@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbap885k80uf6"
-path="res://.godot/imported/right_armament.png-bcce278d92cefbbfbf7991455e33fb19.ctex"
+uid="uid://ce418fsa1yrpe"
+path="res://.godot/imported/blue_light_strip_light_mask.png-a04ab80975839bd59d9c9ed7a61b5cb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/right_armament.png"
-dest_files=["res://.godot/imported/right_armament.png-bcce278d92cefbbfbf7991455e33fb19.ctex"]
+source_file="res://sprites/sprites/bot/blue_light_strip_light_mask.png"
+dest_files=["res://.godot/imported/blue_light_strip_light_mask.png-a04ab80975839bd59d9c9ed7a61b5cb4.ctex"]
 
 [params]
 

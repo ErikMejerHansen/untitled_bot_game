@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bja36penelhi0"]
 
-[ext_resource type="Texture2D" uid="uid://csrjncf7u8j8e" path="res://res/sprites/bot/splinters.png" id="1_83c1x"]
+[ext_resource type="Texture2D" uid="uid://csrjncf7u8j8e" path="res://sprites/sprites/bot/splinters.png" id="1_83c1x"]
 [ext_resource type="Script" path="res://effects/wood_fragments_explosion.gd" id="2_t1m41"]
 
 [sub_resource type="Curve" id="Curve_88euc"]

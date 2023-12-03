@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp3u8x1ur6h2a"
-path="res://.godot/imported/drone_gun.png-08ec1686b30b16afc1d42898ca7b9178.ctex"
+uid="uid://culiyhbvdpoj1"
+path="res://.godot/imported/bullet.png-e261117018589193712ca44683199857.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/drone_gun.png"
-dest_files=["res://.godot/imported/drone_gun.png-08ec1686b30b16afc1d42898ca7b9178.ctex"]
+source_file="res://sprites/sprites/bot/bullet.png"
+dest_files=["res://.godot/imported/bullet.png-e261117018589193712ca44683199857.ctex"]
 
 [params]
 

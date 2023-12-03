@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy2hjojvqej5n"
-path="res://.godot/imported/concrete_floor_with_blue_light_strip.png-1a6031779a8cee907060e02fdc2715c3.ctex"
+uid="uid://csrjncf7u8j8e"
+path="res://.godot/imported/splinters.png-692b82301a8e9655786abab69771a3ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/concrete_floor_with_blue_light_strip.png"
-dest_files=["res://.godot/imported/concrete_floor_with_blue_light_strip.png-1a6031779a8cee907060e02fdc2715c3.ctex"]
+source_file="res://sprites/sprites/bot/splinters.png"
+dest_files=["res://.godot/imported/splinters.png-692b82301a8e9655786abab69771a3ba.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://cy6seo05bukma"]
 
-[ext_resource type="Script" path="res://EnemyDrone.gd" id="1_tlhve"]
-[ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://res/sprites/bot/drone_shadow.png" id="2_5akrv"]
-[ext_resource type="Texture2D" uid="uid://bp3u8x1ur6h2a" path="res://res/sprites/bot/drone_gun.png" id="3_3jswc"]
-[ext_resource type="Texture2D" uid="uid://bcbmvfs6l15bn" path="res://res/sprites/bot/Drone.png" id="4_egngk"]
+[ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
+[ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
+[ext_resource type="Texture2D" uid="uid://bp3u8x1ur6h2a" path="res://sprites/sprites/bot/drone_gun.png" id="3_3jswc"]
+[ext_resource type="Texture2D" uid="uid://bcbmvfs6l15bn" path="res://sprites/sprites/bot/Drone.png" id="4_egngk"]
 [ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="5_2t7q2"]
 [ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]

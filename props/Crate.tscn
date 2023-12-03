@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4cnpky6de1c2"]
 
 [ext_resource type="Script" path="res://props/Crate.gd" id="1_3j3ew"]
-[ext_resource type="Texture2D" uid="uid://bmhrc7bc0x4f1" path="res://res/sprites/bot/crate.png" id="2_yxq44"]
+[ext_resource type="Texture2D" uid="uid://bmhrc7bc0x4f1" path="res://sprites/sprites/bot/crate.png" id="2_yxq44"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="3_cf21b"]
 [ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="4_g44a6"]
 [ext_resource type="PackedScene" uid="uid://5ryct63g32to" path="res://effects/wood_fragments.tscn" id="5_rkawg"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck15gegvdbve3"
-path="res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-1a5dd1ffd2d46ed6f9a43ff95ba990f7.ctex"
+uid="uid://c1sdhg5tgm8np"
+path="res://.godot/imported/blue_light_strip.png-e40ad86038ebef100c5dd0120c4b0a6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/2d_lights_and_shadows_neutral_point_light.webp"
-dest_files=["res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-1a5dd1ffd2d46ed6f9a43ff95ba990f7.ctex"]
+source_file="res://sprites/sprites/bot/blue_light_strip.png"
+dest_files=["res://.godot/imported/blue_light_strip.png-e40ad86038ebef100c5dd0120c4b0a6f.ctex"]
 
 [params]
 

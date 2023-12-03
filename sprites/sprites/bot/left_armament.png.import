@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csrjncf7u8j8e"
-path="res://.godot/imported/splinters.png-7006a6a1e1c2a0c63ef61d5ca2fb8a9b.ctex"
+uid="uid://coe0e3eria5od"
+path="res://.godot/imported/left_armament.png-4f856a6c5165ab8752223713df72c551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/splinters.png"
-dest_files=["res://.godot/imported/splinters.png-7006a6a1e1c2a0c63ef61d5ca2fb8a9b.ctex"]
+source_file="res://sprites/sprites/bot/left_armament.png"
+dest_files=["res://.godot/imported/left_armament.png-4f856a6c5165ab8752223713df72c551.ctex"]
 
 [params]
 

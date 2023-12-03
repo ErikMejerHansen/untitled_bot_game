@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmwv2qdkdyayw"
-path="res://.godot/imported/floor_tile.png-20ed6d0ae86f98bafddbfd5933fddb99.ctex"
+uid="uid://bcbmvfs6l15bn"
+path="res://.godot/imported/Drone.png-67fbfc053f55e8b29222d73b30bc012f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/bot/floor_tile.png"
-dest_files=["res://.godot/imported/floor_tile.png-20ed6d0ae86f98bafddbfd5933fddb99.ctex"]
+source_file="res://sprites/sprites/bot/Drone.png"
+dest_files=["res://.godot/imported/Drone.png-67fbfc053f55e8b29222d73b30bc012f.ctex"]
 
 [params]
 
