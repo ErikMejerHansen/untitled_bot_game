@@ -1,15 +1,15 @@
 class_name EnemyDrone
 extends CharacterBody2D
 
-const DROP_SHADOW_OFFSET = Vector2(120, 275)
+const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 
 func _ready():
 	$AnimationPlayer.play("idle")
-		
 
-func _draw():
-	$DroneShadow.global_position = global_position + DROP_SHADOW_OFFSET.rotated(rotation)
-	
+
+func _physics_process(delta):
+	$DroneShadow.global_rotation = 0
+	$DroneShadow.global_position = global_position - DROP_SHADOW_OFFSET
 	
 func _on_die(_damage_source: Node2D):
 	queue_free()

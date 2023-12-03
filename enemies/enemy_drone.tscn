@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=16 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="5_2t7q2"]
 [ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]
+[ext_resource type="Script" path="res://finite_state_machine/StateMachine.gd" id="8_m8odb"]
+[ext_resource type="Script" path="res://enemies/Idle.gd" id="9_rwplg"]
 
 [sub_resource type="Animation" id="Animation_xu4mr"]
 length = 3.0
@@ -78,7 +80,7 @@ radius = 143.422
 radius = 147.014
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kyt42"]
-radius = 1200.0
+radius = 851.001
 
 [node name="EnemyDrone" type="CharacterBody2D"]
 position = Vector2(1391, 1202)
@@ -128,5 +130,14 @@ shape = SubResource("CircleShape2D_w4n0x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_kyt42")
 debug_color = Color(0.878431, 0.333333, 0.180392, 0.419608)
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("8_m8odb")
+state = NodePath("EnemyIdleState")
+
+[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
+script = ExtResource("9_rwplg")
+actor = NodePath("../..")
+idle_search_radius = 100.0
 
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
