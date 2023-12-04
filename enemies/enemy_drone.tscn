@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=21 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://finite_state_machine/StateMachine.gd" id="8_m8odb"]
 [ext_resource type="Script" path="res://enemies/Idle.gd" id="9_rwplg"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="12_fxggr"]
+[ext_resource type="Script" path="res://finite_state_machine/EnemyAlertState.gd" id="13_t8q5d"]
 
 [sub_resource type="Animation" id="Animation_xu4mr"]
 length = 3.0
@@ -65,6 +66,34 @@ tracks/3/keys = {
 "values": [Vector2(10, 60)]
 }
 
+[sub_resource type="Animation" id="Animation_b55sn"]
+resource_name = "deploy_guns"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Gun1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.8),
+"transitions": PackedFloat32Array(10, 10, 1),
+"update": 0,
+"values": [Vector2(10, -60), Vector2(100, -58.556), Vector2(100, -120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Gun2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.9),
+"transitions": PackedFloat32Array(9, 10, 1),
+"update": 0,
+"values": [Vector2(10, 60), Vector2(100, 60.444), Vector2(100, 120)]
+}
+
 [sub_resource type="Animation" id="Animation_hllq1"]
 resource_name = "idle"
 length = 3.0
@@ -92,34 +121,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(2.08165e-12, -5), Vector2(2.08165e-12, 7)]
-}
-
-[sub_resource type="Animation" id="Animation_b55sn"]
-resource_name = "deploy_guns"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Gun1:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.8),
-"transitions": PackedFloat32Array(10, 10, 1),
-"update": 0,
-"values": [Vector2(10, -60), Vector2(100, -58.556), Vector2(100, -120)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Gun2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.1, 1.9),
-"transitions": PackedFloat32Array(9, 10, 1),
-"update": 0,
-"values": [Vector2(10, 60), Vector2(100, 60.444), Vector2(100, 120)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k8jdy"]
@@ -165,10 +166,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_3jswc")
 
 [node name="MainBodyIdle" type="Sprite2D" parent="Node2D"]
-visible = false
 texture = ExtResource("4_d0x75")
 
 [node name="MainBodyAlert" type="Sprite2D" parent="Node2D"]
+visible = false
 texture = ExtResource("5_5vqra")
 
 [node name="MainBodyAttack" type="Sprite2D" parent="Node2D"]
@@ -198,8 +199,7 @@ shape = SubResource("CircleShape2D_kyt42")
 debug_color = Color(0.878431, 0.333333, 0.180392, 0.419608)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-color = Color(1, 0.301961, 0, 1)
-energy = 0.5
+energy = 0.25
 shadow_enabled = true
 texture = ExtResource("12_fxggr")
 texture_scale = 6.5
@@ -208,9 +208,14 @@ texture_scale = 6.5
 script = ExtResource("8_m8odb")
 state = NodePath("EnemyIdleState")
 
-[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
+[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "search_area")]
 script = ExtResource("9_rwplg")
 actor = NodePath("../..")
-idle_search_radius = 100.0
+search_area = NodePath("../../Area2D")
+
+[node name="EnemyAlertState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "search_area")]
+script = ExtResource("13_t8q5d")
+actor = NodePath("../..")
+search_area = NodePath("../../Area2D")
 
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
