@@ -464,4 +464,4 @@ rotation = -0.130808
 position = Vector2(3293, 410)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.584314, 0.686275, 0.745098, 1)
+color = Color(0.709804, 0.788235, 0.835294, 1)
