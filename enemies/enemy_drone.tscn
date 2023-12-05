@@ -176,10 +176,11 @@ texture = ExtResource("5_5vqra")
 visible = false
 texture = ExtResource("6_cxqix")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_2t7q2")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "impact_component") instance=ExtResource("5_2t7q2")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 health_component = NodePath("../HealthComponent")
 hit_effect = ExtResource("6_yj1i6")
+impact_component = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_x2rme")

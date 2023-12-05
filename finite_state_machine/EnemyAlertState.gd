@@ -33,17 +33,14 @@ func _exit_state():
 
 func _physics_process(delta):
 	var player_position: Vector2 = player.global_position
-	var target_rotation = actor.global_position.angle_to_point(player_position)
+	var target_rotation = actor.global_position.direction_to(player_position).angle()
 	
-	var look_direction = move_toward(actor.rotation, target_rotation, delta * 10)
+	var look_direction = lerp_angle(actor.rotation, target_rotation, delta * 5)
 	actor.rotation = look_direction
 	var distance_to_player = actor.global_position.distance_to(player_position)
 	
 	if distance_to_player > persuit_distance:
-		#var velocity = actor.global_position.direction_to(player.global_position)
 		actor.velocity = actor.velocity.move_toward(actor.global_position.direction_to(player_position) * max_speed, acceleration * delta)
-		#actor.velocity = velocity * max_speed
-		
 		actor.rotation = actor.velocity.angle()
 		
 		
