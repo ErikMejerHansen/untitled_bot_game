@@ -137,7 +137,7 @@ radius = 143.422
 radius = 147.014
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kyt42"]
-radius = 851.001
+radius = 1450.11
 
 [node name="EnemyDrone" type="CharacterBody2D"]
 position = Vector2(1391, 1202)

@@ -8,7 +8,7 @@ signal player_detected(body: Node2D)
 @export_category("Search Behaviour")
 @export var search_area: Area2D
 @export var idle_movement_radius = 50.0
-@export var acceleration = 50.0 # Should live on Drone
+@export var acceleration = 50.0
 @export var max_speed = 500.0
 
 var anchor_point: Vector2

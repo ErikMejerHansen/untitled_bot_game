@@ -429,7 +429,7 @@ SPEED = 350.0
 ROTATE_SPEED = 1.2
 
 [node name="Crate" parent="." instance=ExtResource("3_ia1bv")]
-position = Vector2(2627, 646)
+position = Vector2(4501, 1105)
 rotation = 0.358107
 
 [node name="Crate3" parent="." instance=ExtResource("3_ia1bv")]
@@ -446,7 +446,7 @@ rotation = 0.255742
 metadata/_edit_group_ = true
 
 [node name="Crate5" parent="." instance=ExtResource("3_ia1bv")]
-position = Vector2(2068, 836)
+position = Vector2(4370, 1630)
 
 [node name="Crate6" parent="." instance=ExtResource("3_ia1bv")]
 position = Vector2(3408, 1164)

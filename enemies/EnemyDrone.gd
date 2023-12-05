@@ -1,12 +1,16 @@
 class_name EnemyDrone
 extends CharacterBody2D
 
+
+
 const DROP_SHADOW_OFFSET = Vector2(-100, -275)
-var guns_deployed = false
+
 @onready var area_2d = $Area2D
 @onready var fsm = $FiniteStateMachine as FiniteStateMachine
 @onready var enemy_idle_state = $FiniteStateMachine/EnemyIdleState as EnemyIdleState
 @onready var enemy_alert_state = $FiniteStateMachine/EnemyAlertState as EnemyAlertState
+
+var guns_deployed = false
 
 func _ready():
 	$AnimationPlayer.play("idle")
