@@ -165,6 +165,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_3jswc")
 
 [node name="MainBodyIdle" type="Sprite2D" parent="Node2D"]
+visible = false
 texture = ExtResource("4_d0x75")
 
 [node name="MainBodyAlert" type="Sprite2D" parent="Node2D"]
@@ -172,7 +173,6 @@ visible = false
 texture = ExtResource("5_5vqra")
 
 [node name="MainBodyAttack" type="Sprite2D" parent="Node2D"]
-visible = false
 texture = ExtResource("6_cxqix")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_2t7q2")]
@@ -205,23 +205,47 @@ shadow_enabled = true
 texture = ExtResource("12_fxggr")
 texture_scale = 6.5
 
-[node name="RayCast2DDown" type="RayCast2D" parent="."]
+[node name="RayCast2DSouth" type="RayCast2D" parent="."]
 position = Vector2(0, 144)
 target_position = Vector2(2.08165e-12, 600)
 collide_with_areas = true
 
-[node name="RayCast2DUp" type="RayCast2D" parent="."]
+[node name="RayCast2DNorth" type="RayCast2D" parent="."]
 position = Vector2(0, -144)
 target_position = Vector2(2.08165e-12, -600)
 collide_with_areas = true
 
-[node name="RayCast2DRight" type="RayCast2D" parent="."]
+[node name="RayCast2DEast" type="RayCast2D" parent="."]
 position = Vector2(144, 0)
 target_position = Vector2(600, 2.08165e-12)
 collide_with_areas = true
 
-[node name="RayCast2DLeft" type="RayCast2D" parent="."]
+[node name="RayCast2DWest" type="RayCast2D" parent="."]
 position = Vector2(-144, 0)
+target_position = Vector2(-600, 2.08165e-12)
+collide_with_areas = true
+
+[node name="RayCast2DNorthEast" type="RayCast2D" parent="."]
+position = Vector2(102, -102)
+rotation = -2.35619
+target_position = Vector2(2.08165e-12, 600)
+collide_with_areas = true
+
+[node name="RayCast2DNorthWest" type="RayCast2D" parent="."]
+position = Vector2(-102, -102)
+rotation = -0.785398
+target_position = Vector2(2.08165e-12, -600)
+collide_with_areas = true
+
+[node name="RayCast2DSouthEast" type="RayCast2D" parent="."]
+position = Vector2(102, 102)
+rotation = 0.785398
+target_position = Vector2(600, 2.08165e-12)
+collide_with_areas = true
+
+[node name="RayCast2DSouthWest" type="RayCast2D" parent="."]
+position = Vector2(-102, 102)
+rotation = -0.785398
 target_position = Vector2(-600, 2.08165e-12)
 collide_with_areas = true
 
