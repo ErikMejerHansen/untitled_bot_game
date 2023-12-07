@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=18 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -9,10 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dv1y76vr3qlg5" path="res://sprites/sprites/bot/drone_attack_v2_2.png" id="6_cxqix"]
 [ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]
-[ext_resource type="Script" path="res://finite_state_machine/StateMachine.gd" id="8_m8odb"]
-[ext_resource type="Script" path="res://enemies/Idle.gd" id="9_rwplg"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="12_fxggr"]
-[ext_resource type="Script" path="res://finite_state_machine/EnemyAlertState.gd" id="13_t8q5d"]
 
 [sub_resource type="Animation" id="Animation_xu4mr"]
 length = 3.0
@@ -131,10 +128,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x2rme"]
-radius = 143.422
+radius = 144.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4n0x"]
-radius = 147.014
+radius = 144.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kyt42"]
 radius = 1450.11
@@ -143,6 +140,8 @@ radius = 1450.11
 position = Vector2(1391, 1202)
 motion_mode = 1
 script = ExtResource("1_tlhve")
+collision_detection_range = 200
+interest_map_scale = 200
 
 [node name="DroneShadow" type="Sprite2D" parent="."]
 position = Vector2(120, 275)
@@ -176,16 +175,16 @@ texture = ExtResource("5_5vqra")
 visible = false
 texture = ExtResource("6_cxqix")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "impact_component") instance=ExtResource("5_2t7q2")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_2t7q2")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 health_component = NodePath("../HealthComponent")
 hit_effect = ExtResource("6_yj1i6")
-impact_component = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_x2rme")
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_i56ju")]
+visible = false
 position = Vector2(2.08165e-12, 2.08165e-12)
 MAX_HEALTH = 400
 
@@ -196,6 +195,7 @@ shape = SubResource("CircleShape2D_w4n0x")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_kyt42")
 debug_color = Color(0.878431, 0.333333, 0.180392, 0.419608)
 
@@ -205,18 +205,24 @@ shadow_enabled = true
 texture = ExtResource("12_fxggr")
 texture_scale = 6.5
 
-[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("8_m8odb")
-state = NodePath("EnemyIdleState")
+[node name="RayCast2DDown" type="RayCast2D" parent="."]
+position = Vector2(0, 144)
+target_position = Vector2(2.08165e-12, 600)
+collide_with_areas = true
 
-[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "search_area")]
-script = ExtResource("9_rwplg")
-actor = NodePath("../..")
-search_area = NodePath("../../Area2D")
+[node name="RayCast2DUp" type="RayCast2D" parent="."]
+position = Vector2(0, -144)
+target_position = Vector2(2.08165e-12, -600)
+collide_with_areas = true
 
-[node name="EnemyAlertState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "search_area")]
-script = ExtResource("13_t8q5d")
-actor = NodePath("../..")
-search_area = NodePath("../../Area2D")
+[node name="RayCast2DRight" type="RayCast2D" parent="."]
+position = Vector2(144, 0)
+target_position = Vector2(600, 2.08165e-12)
+collide_with_areas = true
+
+[node name="RayCast2DLeft" type="RayCast2D" parent="."]
+position = Vector2(-144, 0)
+target_position = Vector2(-600, 2.08165e-12)
+collide_with_areas = true
 
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
