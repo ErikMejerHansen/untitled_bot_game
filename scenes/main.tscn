@@ -579,7 +579,7 @@ position = Vector2(2839, -565)
 rotation = -0.130808
 
 [node name="EnemyDrone" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(2867, 1467)
+position = Vector2(810, 2100)
 max_speed = 200
 collision_detection_range = 500
 debug_draw = true

@@ -6,14 +6,16 @@ extends CharacterBody2D
 const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 
 @onready var area_2d = $Area2D
-@onready var ray_cast_2d_east = $RayCast2DEast
-@onready var ray_cast_2d_south_east = $RayCast2DSouthEast
-@onready var ray_cast_2d_south = $RayCast2DSouth
-@onready var ray_cast_2d_south_west = $RayCast2DSouthWest
-@onready var ray_cast_2d_west = $RayCast2DWest
-@onready var ray_cast_2d_north_west = $RayCast2DNorthWest
-@onready var ray_cast_2d_north = $RayCast2DNorth
-@onready var ray_cast_2d_north_east = $RayCast2DNorthEast
+
+@onready var rays = $Rays as Node2D
+@onready var ray_cast_2d_east = $Rays/RayCast2DEast
+@onready var ray_cast_2d_south_east = $Rays/RayCast2DSouthEast
+@onready var ray_cast_2d_south = $Rays/RayCast2DSouth
+@onready var ray_cast_2d_south_west = $Rays/RayCast2DSouthWest
+@onready var ray_cast_2d_west = $Rays/RayCast2DWest
+@onready var ray_cast_2d_north_west = $Rays/RayCast2DNorthWest
+@onready var ray_cast_2d_north = $Rays/RayCast2DNorth
+@onready var ray_cast_2d_north_east = $Rays/RayCast2DNorthEast
 
 @export var max_speed = 50
 @export var collision_detection_range = 1000
@@ -49,6 +51,8 @@ func _physics_process(delta):
 	$DroneShadow.global_rotation = 0
 	$DroneShadow.global_position = global_position - DROP_SHADOW_OFFSET
 	
+	rays.rotation = -rotation
+	
 	_update_interest_map()
 	_update_danger_map()
 	
@@ -72,10 +76,11 @@ func _physics_process(delta):
 		var direction = directions[i]
 		var interest = interest_map[i]
 		var danger = danger_map[i]
-		new_velocity += direction.normalized() * interest
+		#new_velocity += direction.normalized() * interest
 		new_velocity -= direction.normalized() * danger
 
 	velocity = new_velocity * max_speed
+	#rotation = velocity.angle()
 		
 	if debug_draw:
 		queue_redraw()
@@ -127,9 +132,9 @@ func _draw():
 func _debug_draw():
 	draw_arc(Vector2.ZERO, debug_circle_radius, 0, TAU, 64, Color.WHITE, 10.0)
 	_debug_draw_eight_way_context_map(danger_map, Color.RED)
-	_debug_draw_eight_way_context_map(interest_map, Color.GREEN)
+	#_debug_draw_eight_way_context_map(interest_map, Color.GREEN)
 	
-	draw_line(Vector2.ZERO, velocity * 10, Color.AQUA, 10)
+	draw_line(Vector2.ZERO, velocity.rotated(-rotation) * 10, Color.AQUA, 10)
 
 func _debug_draw_eight_way_context_map(context_map, color):
 	var directions = [
@@ -144,7 +149,7 @@ func _debug_draw_eight_way_context_map(context_map, color):
 	]
 	
 	for i in range(directions.size()):
-		var direction = directions[i].normalized()
+		var direction = directions[i].rotated(-rotation).normalized()
 		var magnitude = direction * (debug_circle_radius + interest_map_scale * context_map[i])
 		draw_line(direction * debug_circle_radius, magnitude, color, 10.0)
 		
