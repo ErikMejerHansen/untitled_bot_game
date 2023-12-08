@@ -9,7 +9,12 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 
 @export var max_speed = 50
 @export var collision_detection_range = 1000
+
+@export_category("Behaviours")
 @export_range(0, 1, 0.1) var obstacle_avoidance = 0.5
+@export_range(0, 1, 0.1) var wander = 0.5
+
+
 
 @export_category("Debug")
 @export var draw_context_maps: bool = false
@@ -60,8 +65,8 @@ func _physics_process(delta):
 		var direction = normalized_directions[i]
 		var interest = interest_map[i]
 		var danger = danger_map[i]
-		new_velocity += direction * interest
-		new_velocity -= direction * danger
+		new_velocity += direction * (interest * wander)
+		new_velocity -= direction * (danger * obstacle_avoidance)
 
 	velocity = velocity.move_toward(new_velocity * max_speed, delta * 100)
 	rotation = velocity.angle()
