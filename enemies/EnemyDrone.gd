@@ -51,8 +51,6 @@ func _physics_process(delta):
 	$DroneShadow.global_rotation = 0
 	$DroneShadow.global_position = global_position - DROP_SHADOW_OFFSET
 	
-	rays.rotation = -rotation
-	
 	_update_interest_map()
 	_update_danger_map()
 	
@@ -76,11 +74,11 @@ func _physics_process(delta):
 		var direction = directions[i]
 		var interest = interest_map[i]
 		var danger = danger_map[i]
-		#new_velocity += direction.normalized() * interest
+		new_velocity += direction.normalized() * interest
 		new_velocity -= direction.normalized() * danger
 
-	velocity = new_velocity * max_speed
-	#rotation = velocity.angle()
+	velocity = velocity.move_toward(new_velocity * max_speed, delta * 100)
+	rotation = velocity.angle()
 		
 	if debug_draw:
 		queue_redraw()
@@ -88,13 +86,39 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _update_danger_map():
-	for i in range(danger_casts.size()):
-		var ray = danger_casts[i]
-		var collision_distance = ray.global_position.distance_to(ray.get_collision_point())
-		var collision_distance_clamped = clamp(collision_distance, 0, collision_detection_range)
-		var danger = remap(collision_distance_clamped, 0, collision_detection_range, 1, 0)
-		
-		danger_map[i] = danger if ray.is_colliding() else 0
+	
+	var directions = [
+		Vector2.RIGHT.normalized(), # East
+		Vector2(1, 1).normalized(), # South East
+		Vector2.DOWN.normalized(), # South
+		Vector2(-1, 1).normalized(), # South West
+		Vector2.LEFT.normalized(), # West
+		Vector2(-1, -1).normalized(), # North West
+		Vector2.UP.normalized(), # North
+		Vector2(1, -1).normalized() # North East
+	]
+	
+	var space_state = get_world_2d().direct_space_state
+	for i in range(directions.size()):
+		var foo = Vector2.ZERO
+		var query = PhysicsRayQueryParameters2D.create(global_position, global_position + (directions[i] * collision_detection_range))
+		query.exclude = [self]
+		var result = space_state.intersect_ray(query)
+		if result:
+			var distance = result.position - global_position - directions[0] * 144
+			var danger = remap(distance.length(), 0, collision_detection_range, 1, 0)
+			danger_map[i] = danger
+		else:
+			danger_map[i] = 0
+	
+	
+	#for i in range(danger_casts.size()):
+		#var ray = danger_casts[i]
+		#var collision_distance = ray.global_position.distance_to(ray.get_collision_point())
+		#var collision_distance_clamped = clamp(collision_distance, 0, collision_detection_range)
+		#var danger = remap(collision_distance_clamped, 0, collision_detection_range, 1, 0)
+		#
+		#danger_map[i] = danger if ray.is_colliding() else 0
 		
 func _update_interest_map():
 	var target = get_tree().get_first_node_in_group("player")
@@ -152,21 +176,6 @@ func _debug_draw_eight_way_context_map(context_map, color):
 		var direction = directions[i].rotated(-rotation).normalized()
 		var magnitude = direction * (debug_circle_radius + interest_map_scale * context_map[i])
 		draw_line(direction * debug_circle_radius, magnitude, color, 10.0)
-		
-	#
-	#var east = Vector2.RIGHT * (debug_circle_radius  + interest_map_scale * context_map[0])
-	#var south_east = Vector2(1, 1).normalized() * (debug_circle_radius  + interest_map_scale * context_map[1])
-	#var south = Vector2.DOWN * (debug_circle_radius  + interest_map_scale * context_map[2])
-	#var south_west = Vector2(-1, -1).normalized() * (debug_circle_radius  + interest_map_scale * context_map[3])
-	#var west = Vector2.LEFT * (debug_circle_radius + interest_map_scale * context_map[4])
-	#var north_west = Vector2(-1, -1).normalized() * (debug_circle_radius  + interest_map_scale * context_map[5])
-	#var north = Vector2.UP * (debug_circle_radius  + interest_map_scale * context_map[6])
-	#var north_east = Vector2(-1, 1).normalized() * (debug_circle_radius  + interest_map_scale * context_map[7])
-	#
-	#draw_line(Vector2.RIGHT * debug_circle_radius, east, color, 10.0)
-	#draw_line(Vector2.DOWN * debug_circle_radius, south, color, 10.0)
-	#draw_line(Vector2.LEFT * debug_circle_radius, west, color, 10.0)
-	#draw_line(Vector2.UP * debug_circle_radius, north, color, 10.0)
 
 func _on_die(_damage_source: Node2D):
 	queue_free()
