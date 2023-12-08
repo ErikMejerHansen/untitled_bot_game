@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbup3084spplv"]
+
+[ext_resource type="Script" path="res://behaviours/Behaviours.gd" id="1_hcxbl"]
+[ext_resource type="Script" path="res://behaviours/SeekPlayerBehaviour.gd" id="2_2s2p4"]
+[ext_resource type="Script" path="res://behaviours/RandomWalkBehaviour.gd" id="3_1at4m"]
+[ext_resource type="Script" path="res://behaviours/ObstacleAvoidanceBehaviour.gd" id="4_qfae4"]
+
+[node name="Behaviours" type="Node2D"]
+script = ExtResource("1_hcxbl")
+seek_player_strength = 0.4
+random_walk_strength = 0.2
+
+[node name="SeekPlayerBehaviour" type="Node" parent="."]
+script = ExtResource("2_2s2p4")
+
+[node name="RandomWalkBehaviour" type="Node" parent="."]
+script = ExtResource("3_1at4m")
+
+[node name="ObstacleAvoidanceBehaviour" type="Node" parent="."]
+script = ExtResource("4_qfae4")
+collision_detection_range = 1000

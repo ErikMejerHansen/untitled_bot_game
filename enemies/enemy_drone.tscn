@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=19 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
 [ext_resource type="Texture2D" uid="uid://bp3u8x1ur6h2a" path="res://sprites/sprites/bot/drone_gun.png" id="3_3jswc"]
+[ext_resource type="PackedScene" uid="uid://dbup3084spplv" path="res://behaviours/behaviours.tscn" id="3_5hdvn"]
 [ext_resource type="Texture2D" uid="uid://vu721od76h0g" path="res://sprites/sprites/bot/drone_idle.png" id="4_d0x75"]
 [ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="5_2t7q2"]
 [ext_resource type="Texture2D" uid="uid://7m1hoe3j7x7p" path="res://sprites/sprites/bot/drone_alert_v2.png" id="5_5vqra"]
@@ -17,7 +18,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/path = NodePath("Sprites:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -29,7 +30,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D:position")
+tracks/1/path = NodePath("Sprites:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -41,7 +42,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Gun1:position")
+tracks/2/path = NodePath("Sprites/Gun1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -53,7 +54,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Node2D/Gun2:position")
+tracks/3/path = NodePath("Sprites/Gun2:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -69,7 +70,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Gun1:position")
+tracks/0/path = NodePath("Sprites/Gun1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -81,7 +82,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Gun2:position")
+tracks/1/path = NodePath("Sprites/Gun2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -98,7 +99,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/path = NodePath("Sprites:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -110,7 +111,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D:position")
+tracks/1/path = NodePath("Sprites:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -140,8 +141,6 @@ radius = 1450.11
 position = Vector2(1391, 1202)
 motion_mode = 1
 script = ExtResource("1_tlhve")
-collision_detection_range = 200
-interest_map_scale = 200
 
 [node name="DroneShadow" type="Sprite2D" parent="."]
 position = Vector2(120, 275)
@@ -152,26 +151,28 @@ libraries = {
 "": SubResource("AnimationLibrary_k8jdy")
 }
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Behaviours" parent="." instance=ExtResource("3_5hdvn")]
 
-[node name="Gun1" type="Sprite2D" parent="Node2D"]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Gun1" type="Sprite2D" parent="Sprites"]
 position = Vector2(10, -60)
 scale = Vector2(2, 2)
 texture = ExtResource("3_3jswc")
 
-[node name="Gun2" type="Sprite2D" parent="Node2D"]
+[node name="Gun2" type="Sprite2D" parent="Sprites"]
 position = Vector2(10, 60)
 scale = Vector2(2, 2)
 texture = ExtResource("3_3jswc")
 
-[node name="MainBodyIdle" type="Sprite2D" parent="Node2D"]
+[node name="MainBodyIdle" type="Sprite2D" parent="Sprites"]
 texture = ExtResource("4_d0x75")
 
-[node name="MainBodyAlert" type="Sprite2D" parent="Node2D"]
+[node name="MainBodyAlert" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource("5_5vqra")
 
-[node name="MainBodyAttack" type="Sprite2D" parent="Node2D"]
+[node name="MainBodyAttack" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource("6_cxqix")
 
@@ -193,9 +194,9 @@ position = Vector2(2.08165e-12, 2.08165e-12)
 shape = SubResource("CircleShape2D_w4n0x")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 shape = SubResource("CircleShape2D_kyt42")
 debug_color = Color(0.878431, 0.333333, 0.180392, 0.419608)
 
