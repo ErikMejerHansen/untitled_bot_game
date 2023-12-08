@@ -12,7 +12,8 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 @export_range(0, 1, 0.1) var obstacle_avoidance = 0.5
 
 @export_category("Debug")
-@export var debug_draw: bool = false
+@export var draw_context_maps: bool = false
+
 @export var debug_circle_radius = 200
 @export var interest_map_scale = 100
 
@@ -65,7 +66,7 @@ func _physics_process(delta):
 	velocity = velocity.move_toward(new_velocity * max_speed, delta * 100)
 	rotation = velocity.angle()
 		
-	if debug_draw == true:
+	if draw_context_maps:
 		queue_redraw()
 	
 	move_and_slide()
@@ -83,11 +84,10 @@ func _update_danger_map():
 			danger_map[i] = danger
 		else:
 			danger_map[i] = 0
-			
+
 func _update_interest_map():
 	var target = get_tree().get_first_node_in_group("player")
 	var direction_to_target = global_position.direction_to(target.global_position).normalized()
-	
 	
 	### Seek player
 	#for i in range(normalized_directions.size()):
@@ -100,10 +100,9 @@ func _update_interest_map():
 		var direction_weight = noise.get_noise_2dv(direction * time)
 		interest_map[i] = remap(direction_weight, -1, 1, 0, 1)
 
-	
+
 func _draw():
-	print("debug", debug_draw)
-	if debug_draw == true:
+	if draw_context_maps:
 		_debug_draw()
 
 func _debug_draw():

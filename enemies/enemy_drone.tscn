@@ -165,7 +165,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_3jswc")
 
 [node name="MainBodyIdle" type="Sprite2D" parent="Node2D"]
-visible = false
 texture = ExtResource("4_d0x75")
 
 [node name="MainBodyAlert" type="Sprite2D" parent="Node2D"]
@@ -173,6 +172,7 @@ visible = false
 texture = ExtResource("5_5vqra")
 
 [node name="MainBodyAttack" type="Sprite2D" parent="Node2D"]
+visible = false
 texture = ExtResource("6_cxqix")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_2t7q2")]

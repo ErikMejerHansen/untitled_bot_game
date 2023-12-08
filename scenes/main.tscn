@@ -582,7 +582,6 @@ rotation = -0.130808
 position = Vector2(2250, 438)
 max_speed = 200
 collision_detection_range = 500
-debug_draw = true
 interest_map_scale = 300
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
