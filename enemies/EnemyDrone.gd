@@ -7,22 +7,12 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 
 @onready var area_2d = $Area2D
 
-@onready var rays = $Rays as Node2D
-@onready var ray_cast_2d_east = $Rays/RayCast2DEast
-@onready var ray_cast_2d_south_east = $Rays/RayCast2DSouthEast
-@onready var ray_cast_2d_south = $Rays/RayCast2DSouth
-@onready var ray_cast_2d_south_west = $Rays/RayCast2DSouthWest
-@onready var ray_cast_2d_west = $Rays/RayCast2DWest
-@onready var ray_cast_2d_north_west = $Rays/RayCast2DNorthWest
-@onready var ray_cast_2d_north = $Rays/RayCast2DNorth
-@onready var ray_cast_2d_north_east = $Rays/RayCast2DNorthEast
-
 @export var max_speed = 50
 @export var collision_detection_range = 1000
 @export_range(0, 1, 0.1) var obstacle_avoidance = 0.5
 
 @export_category("Debug")
-@export var debug_draw = false
+@export var debug_draw: bool = false
 @export var debug_circle_radius = 200
 @export var interest_map_scale = 100
 
@@ -30,8 +20,18 @@ var guns_deployed = false
 
 # Right, down, left, up
 var interest_map = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-var danger_casts = []
 var danger_map = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+var normalized_directions = [
+		Vector2.RIGHT.normalized(), # East
+		Vector2(1, 1).normalized(), # South East
+		Vector2.DOWN.normalized(), # South
+		Vector2(-1, 1).normalized(), # South West
+		Vector2.LEFT.normalized(), # West
+		Vector2(-1, -1).normalized(), # North West
+		Vector2.UP.normalized(), # North
+		Vector2(1, -1).normalized() # North East
+	]
 
 var noise = FastNoiseLite.new()
 var time = 0
@@ -41,9 +41,8 @@ func _ready():
 	noise.seed = randi()
 	noise.fractal_octaves = 4
 	noise.frequency = 1.0 / 20.0
-	danger_casts = [ray_cast_2d_east, ray_cast_2d_south_east, ray_cast_2d_south, ray_cast_2d_south_west, ray_cast_2d_west, ray_cast_2d_north_west, ray_cast_2d_north, ray_cast_2d_north_east]
-	
-	$AnimationPlayer.play("deploy_guns")	
+		
+	$AnimationPlayer.play("idle")	
 
 
 func _physics_process(delta):
@@ -54,126 +53,69 @@ func _physics_process(delta):
 	_update_interest_map()
 	_update_danger_map()
 	
-	var directions = [
-		Vector2.RIGHT, # East
-		Vector2(1, 1), # South East
-		Vector2.DOWN, # South
-		Vector2(-1, 1), # South West
-		Vector2.LEFT, # West
-		Vector2(-1, -1), # North West
-		Vector2.UP, # North
-		Vector2(1, -1) # North East
-	]
-	
-	#var rotated_direction = directions.map(func d: return d.rotated(rotation))
-	# There is a bug when we're rotated
-	#var rotated_directions = directions.map(func(direction): return direction.rotated(rotation).normalized())
 	var new_velocity = Vector2.ZERO
 	
-	for i in range(directions.size()):
-		var direction = directions[i]
+	for i in range(normalized_directions.size()):
+		var direction = normalized_directions[i]
 		var interest = interest_map[i]
 		var danger = danger_map[i]
-		new_velocity += direction.normalized() * interest
-		new_velocity -= direction.normalized() * danger
+		new_velocity += direction * interest
+		new_velocity -= direction * danger
 
 	velocity = velocity.move_toward(new_velocity * max_speed, delta * 100)
 	rotation = velocity.angle()
 		
-	if debug_draw:
+	if debug_draw == true:
 		queue_redraw()
 	
 	move_and_slide()
 
 func _update_danger_map():
-	
-	var directions = [
-		Vector2.RIGHT.normalized(), # East
-		Vector2(1, 1).normalized(), # South East
-		Vector2.DOWN.normalized(), # South
-		Vector2(-1, 1).normalized(), # South West
-		Vector2.LEFT.normalized(), # West
-		Vector2(-1, -1).normalized(), # North West
-		Vector2.UP.normalized(), # North
-		Vector2(1, -1).normalized() # North East
-	]
-	
 	var space_state = get_world_2d().direct_space_state
-	for i in range(directions.size()):
+	for i in range(normalized_directions.size()):
 		var foo = Vector2.ZERO
-		var query = PhysicsRayQueryParameters2D.create(global_position, global_position + (directions[i] * collision_detection_range))
+		var query = PhysicsRayQueryParameters2D.create(global_position, global_position + (normalized_directions[i] * collision_detection_range))
 		query.exclude = [self]
 		var result = space_state.intersect_ray(query)
 		if result:
-			var distance = result.position - global_position - directions[0] * 144
+			var distance = result.position - global_position - normalized_directions[i] * 144
 			var danger = remap(distance.length(), 0, collision_detection_range, 1, 0)
 			danger_map[i] = danger
 		else:
 			danger_map[i] = 0
-	
-	
-	#for i in range(danger_casts.size()):
-		#var ray = danger_casts[i]
-		#var collision_distance = ray.global_position.distance_to(ray.get_collision_point())
-		#var collision_distance_clamped = clamp(collision_distance, 0, collision_detection_range)
-		#var danger = remap(collision_distance_clamped, 0, collision_detection_range, 1, 0)
-		#
-		#danger_map[i] = danger if ray.is_colliding() else 0
-		
+			
 func _update_interest_map():
 	var target = get_tree().get_first_node_in_group("player")
 	var direction_to_target = global_position.direction_to(target.global_position).normalized()
 	
-	var directions = [
-		Vector2.RIGHT, # East
-		Vector2(1, 1), # South East
-		Vector2.DOWN, # South
-		Vector2(-1, 1), # South West
-		Vector2.LEFT, # West
-		Vector2(-1, -1), # North West
-		Vector2.UP, # North
-		Vector2(1, -1) # North East
-	]
 	
 	### Seek player
-	#for i in range(directions.size()):
-		#var direction = directions[i].normalized()
+	#for i in range(normalized_directions.size()):
+		#var direction = normalized_directions[i]
 		#interest_map[i] = max(0, direction.dot(direction_to_target))
 
 	### Noise based Random walk
-	for i in range(directions.size()):
-		var direction = directions[i].normalized()
+	for i in range(normalized_directions.size()):
+		var direction = normalized_directions[i]
 		var direction_weight = noise.get_noise_2dv(direction * time)
 		interest_map[i] = remap(direction_weight, -1, 1, 0, 1)
 
 	
 func _draw():
-	if debug_draw:
+	print("debug", debug_draw)
+	if debug_draw == true:
 		_debug_draw()
-
-
 
 func _debug_draw():
 	draw_arc(Vector2.ZERO, debug_circle_radius, 0, TAU, 64, Color.WHITE, 10.0)
 	_debug_draw_eight_way_context_map(danger_map, Color.RED)
-	#_debug_draw_eight_way_context_map(interest_map, Color.GREEN)
+	_debug_draw_eight_way_context_map(interest_map, Color.GREEN)
 	
 	draw_line(Vector2.ZERO, velocity.rotated(-rotation) * 10, Color.AQUA, 10)
 
-func _debug_draw_eight_way_context_map(context_map, color):
-	var directions = [
-		Vector2.RIGHT, # East
-		Vector2(1, 1), # South East
-		Vector2.DOWN, # South
-		Vector2(-1, 1), # South West
-		Vector2.LEFT, # West
-		Vector2(-1, -1), # North West
-		Vector2.UP, # North
-		Vector2(1, -1) # North East
-	]
-	
-	for i in range(directions.size()):
-		var direction = directions[i].rotated(-rotation).normalized()
+func _debug_draw_eight_way_context_map(context_map, color):	
+	for i in range(normalized_directions.size()):
+		var direction = normalized_directions[i].rotated(-rotation)
 		var magnitude = direction * (debug_circle_radius + interest_map_scale * context_map[i])
 		draw_line(direction * debug_circle_radius, magnitude, color, 10.0)
 
