@@ -18,5 +18,3 @@ func _update_danger_map(danger_map: Array, strenght: float):
 			var distance = result.position - parent.global_position - normalized_directions[i] * 144
 			var danger = remap(distance.length(), 0, collision_detection_range, 1, 0) * strenght
 			danger_map[i] = max(danger_map[i], danger)
-		else:
-			danger_map[i] = 0	

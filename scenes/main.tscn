@@ -579,7 +579,7 @@ position = Vector2(2839, -565)
 rotation = -0.130808
 
 [node name="EnemyDrone" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(2250, 438)
+position = Vector2(2398, 667)
 max_speed = 200
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

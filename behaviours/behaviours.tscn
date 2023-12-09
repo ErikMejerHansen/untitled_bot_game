@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbup3084spplv"]
+[gd_scene load_steps=6 format=3 uid="uid://dbup3084spplv"]
 
 [ext_resource type="Script" path="res://behaviours/Behaviours.gd" id="1_hcxbl"]
 [ext_resource type="Script" path="res://behaviours/SeekPlayerBehaviour.gd" id="2_2s2p4"]
 [ext_resource type="Script" path="res://behaviours/RandomWalkBehaviour.gd" id="3_1at4m"]
 [ext_resource type="Script" path="res://behaviours/ObstacleAvoidanceBehaviour.gd" id="4_qfae4"]
+[ext_resource type="Script" path="res://behaviours/GuardStartingPointBehaviour.gd" id="5_gf3jh"]
 
 [node name="Behaviours" type="Node2D"]
 script = ExtResource("1_hcxbl")
@@ -19,3 +20,6 @@ script = ExtResource("3_1at4m")
 [node name="ObstacleAvoidanceBehaviour" type="Node" parent="."]
 script = ExtResource("4_qfae4")
 collision_detection_range = 1000
+
+[node name="GuardStartingPointBehaviour" type="Node2D" parent="."]
+script = ExtResource("5_gf3jh")
