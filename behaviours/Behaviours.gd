@@ -8,6 +8,9 @@ extends Node2D
 @export_range(0, 1, 0.1) var obstacle_avoidance_strength = 1.0
 @export_range(0, 1, 0.1) var guard_starting_point_strength = 1.0
 
+@export_category("Obstacle Avoidance")
+@export var collision_detection_range = 800
+
 @export_category("Guard Startig Point")
 @export var max_range = 300.0
 

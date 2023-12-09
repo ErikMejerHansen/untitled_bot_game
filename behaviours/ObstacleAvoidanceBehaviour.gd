@@ -2,10 +2,12 @@ class_name ObstacleAvoidanceBehaviour
 extends Behaviour
 
 var parent: Node2D
-@export var collision_detection_range = 800
+var collision_detection_range: float
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	parent = get_parent()
+	collision_detection_range = parent.collision_detection_range
 
 func _update_danger_map(danger_map: Array, strenght: float):
 	

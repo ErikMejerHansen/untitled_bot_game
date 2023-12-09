@@ -10,6 +10,7 @@
 script = ExtResource("1_hcxbl")
 seek_player_strength = 0.4
 random_walk_strength = 0.2
+collision_detection_range = 300
 
 [node name="SeekPlayerBehaviour" type="Node" parent="."]
 script = ExtResource("2_2s2p4")
@@ -19,7 +20,6 @@ script = ExtResource("3_1at4m")
 
 [node name="ObstacleAvoidanceBehaviour" type="Node" parent="."]
 script = ExtResource("4_qfae4")
-collision_detection_range = 1000
 
 [node name="GuardStartingPointBehaviour" type="Node2D" parent="."]
 script = ExtResource("5_gf3jh")
