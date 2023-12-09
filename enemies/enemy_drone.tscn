@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=22 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -10,7 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dv1y76vr3qlg5" path="res://sprites/sprites/bot/drone_attack_v2_2.png" id="6_cxqix"]
 [ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]
+[ext_resource type="Script" path="res://finite_state_machine/StateMachine.gd" id="12_fqhc6"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="12_fxggr"]
+[ext_resource type="Script" path="res://enemies/Idle.gd" id="13_go3rp"]
+[ext_resource type="Script" path="res://finite_state_machine/EnemyAlertState.gd" id="14_ajot6"]
 
 [sub_resource type="Animation" id="Animation_xu4mr"]
 length = 3.0
@@ -152,10 +155,8 @@ libraries = {
 }
 
 [node name="Behaviours" parent="." instance=ExtResource("3_5hdvn")]
-random_walk_strength = 0.2
-obstacle_avoidance_strength = 1.0
-strafing_strength = 0.6
 collision_detection_range = 800
+draw_context_maps = false
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -198,7 +199,6 @@ position = Vector2(2.08165e-12, 2.08165e-12)
 shape = SubResource("CircleShape2D_w4n0x")
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_kyt42")
@@ -209,5 +209,21 @@ energy = 0.25
 shadow_enabled = true
 texture = ExtResource("12_fxggr")
 texture_scale = 6.5
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("12_fqhc6")
+state = NodePath("EnemyIdleState")
+
+[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "detection_area", "behaviours")]
+script = ExtResource("13_go3rp")
+actor = NodePath("../..")
+detection_area = NodePath("../../Area2D")
+behaviours = NodePath("../../Behaviours")
+
+[node name="EnemyAlertState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "search_area", "behaviours")]
+script = ExtResource("14_ajot6")
+actor = NodePath("../..")
+search_area = NodePath("../../Area2D")
+behaviours = NodePath("../../Behaviours")
 
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]

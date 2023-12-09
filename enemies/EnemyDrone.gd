@@ -7,12 +7,17 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 @export var max_speed = 50
 
 @onready var behaviours = $Behaviours as Behaviours
+@onready var fsm = $FiniteStateMachine as FiniteStateMachine
+@onready var enemy_idle_state = $FiniteStateMachine/EnemyIdleState as EnemyIdleState
+@onready var enemy_alert_state = $FiniteStateMachine/EnemyAlertState as EnemyAlertState
 
 var guns_deployed = false
 
 
 func _ready():
-	$AnimationPlayer.play("idle")	
+	$AnimationPlayer.play("idle")
+	enemy_idle_state.player_detected.connect(fsm.change_state.bind(enemy_alert_state))
+	enemy_alert_state.player_lost.connect(fsm.change_state.bind(enemy_idle_state))
 
 
 func _physics_process(delta):

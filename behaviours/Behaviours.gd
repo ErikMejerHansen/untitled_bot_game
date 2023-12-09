@@ -15,6 +15,9 @@ extends Node2D
 @export_category("Guard Startig Point")
 @export var max_range = 200.0
 
+@export_category("Strafing")
+@export var strafing_target: Node2D
+
 @export_category("Debug")
 @export var draw_context_maps: bool = false
 @export var debug_circle_radius = 200
