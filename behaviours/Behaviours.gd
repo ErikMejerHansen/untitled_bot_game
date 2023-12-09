@@ -3,16 +3,17 @@ extends Node2D
 
 
 @export_category("Behaviour Mix")
-@export_range(0, 1, 0.1) var seek_player_strength = 1.0
-@export_range(0, 1, 0.1) var random_walk_strength = 1.0
-@export_range(0, 1, 0.1) var obstacle_avoidance_strength = 1.0
-@export_range(0, 1, 0.1) var guard_starting_point_strength = 1.0
+@export_range(0, 1, 0.1) var seek_player_strength = 0.0
+@export_range(0, 1, 0.1) var random_walk_strength = 0.0
+@export_range(0, 1, 0.1) var obstacle_avoidance_strength = 0.0
+@export_range(0, 1, 0.1) var guard_starting_point_strength = 0.0
+@export_range(0, 1, 0.1) var strafing_strength = 0.0
 
 @export_category("Obstacle Avoidance")
 @export var collision_detection_range = 800
 
 @export_category("Guard Startig Point")
-@export var max_range = 300.0
+@export var max_range = 200.0
 
 @export_category("Debug")
 @export var draw_context_maps: bool = false
@@ -23,6 +24,7 @@ extends Node2D
 @onready var random_walk_behaviour = $RandomWalkBehaviour
 @onready var obstacle_avoidance_behaviour = $ObstacleAvoidanceBehaviour
 @onready var guard_starting_point_behaviour = $GuardStartingPointBehaviour
+@onready var strafeing_behaviour = $StrafeingBehaviour
 
 
 var normalized_directions = [
@@ -53,6 +55,7 @@ func get_target_velocity():
 	random_walk_behaviour.update_context_maps(interest_map, danger_map, random_walk_strength)
 	obstacle_avoidance_behaviour.update_context_maps(interest_map, danger_map, obstacle_avoidance_strength)
 	guard_starting_point_behaviour.update_context_maps(interest_map, danger_map, guard_starting_point_strength)
+	strafeing_behaviour.update_context_maps(interest_map, danger_map, strafing_strength)
 	
 	var target_velocity = Vector2.ZERO
 	for i in range(normalized_directions.size()):

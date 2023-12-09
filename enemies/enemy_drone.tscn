@@ -152,10 +152,10 @@ libraries = {
 }
 
 [node name="Behaviours" parent="." instance=ExtResource("3_5hdvn")]
-seek_player_strength = 1.0
-random_walk_strength = 1.0
-max_range = 200.0
-draw_context_maps = true
+random_walk_strength = 0.2
+obstacle_avoidance_strength = 1.0
+strafing_strength = 0.6
+collision_detection_range = 800
 
 [node name="Sprites" type="Node2D" parent="."]
 
