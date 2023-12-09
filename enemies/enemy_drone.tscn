@@ -69,7 +69,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_b55sn"]
 resource_name = "deploy_guns"
-length = 2.0
+length = 2.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -77,10 +77,10 @@ tracks/0/path = NodePath("Sprites/Gun1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.8),
-"transitions": PackedFloat32Array(10, 10, 1),
+"times": PackedFloat32Array(0, 1, 1.8, 2.2),
+"transitions": PackedFloat32Array(10, 10, 10, 1),
 "update": 0,
-"values": [Vector2(10, -60), Vector2(100, -58.556), Vector2(100, -120)]
+"values": [Vector2(10, -60), Vector2(100, -58.556), Vector2(100, -120), Vector2(83, -120)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -89,10 +89,10 @@ tracks/1/path = NodePath("Sprites/Gun2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.1, 1.9),
-"transitions": PackedFloat32Array(9, 10, 1),
+"times": PackedFloat32Array(0, 1.1, 1.9, 2.3),
+"transitions": PackedFloat32Array(9, 10, 10, 1),
 "update": 0,
-"values": [Vector2(10, 60), Vector2(100, 60.444), Vector2(100, 120)]
+"values": [Vector2(10, 60), Vector2(100, 60.444), Vector2(100, 120), Vector2(83, 120)]
 }
 
 [sub_resource type="Animation" id="Animation_hllq1"]
