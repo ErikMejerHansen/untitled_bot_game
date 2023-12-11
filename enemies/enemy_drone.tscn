@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=23 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="12_fxggr"]
 [ext_resource type="Script" path="res://enemies/Idle.gd" id="13_go3rp"]
 [ext_resource type="Script" path="res://finite_state_machine/EnemyAlertState.gd" id="14_ajot6"]
+[ext_resource type="Script" path="res://finite_state_machine/EnemyAttackState.gd" id="15_iolgv"]
 
 [sub_resource type="Animation" id="Animation_xu4mr"]
 length = 3.0
@@ -138,7 +139,7 @@ radius = 144.0
 radius = 144.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kyt42"]
-radius = 1450.11
+radius = 1043.46
 
 [node name="EnemyDrone" type="CharacterBody2D"]
 position = Vector2(1391, 1202)
@@ -226,4 +227,12 @@ actor = NodePath("../..")
 search_area = NodePath("../../Area2D")
 behaviours = NodePath("../../Behaviours")
 
+[node name="EnemyAttackState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "search_area", "behaviours")]
+script = ExtResource("15_iolgv")
+actor = NodePath("../..")
+search_area = NodePath("../../Area2D")
+behaviours = NodePath("../../Behaviours")
+
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
+[connection signal="player_lost" from="FiniteStateMachine/EnemyAlertState" to="." method="_on_player_lost"]
+[connection signal="player_lost" from="FiniteStateMachine/EnemyAttackState" to="." method="_on_player_lost"]

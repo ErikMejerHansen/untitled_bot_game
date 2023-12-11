@@ -10,6 +10,7 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 @onready var fsm = $FiniteStateMachine as FiniteStateMachine
 @onready var enemy_idle_state = $FiniteStateMachine/EnemyIdleState as EnemyIdleState
 @onready var enemy_alert_state = $FiniteStateMachine/EnemyAlertState as EnemyAlertState
+@onready var enemy_attack_state = $FiniteStateMachine/EnemyAttackState
 
 var guns_deployed = false
 
@@ -18,6 +19,7 @@ func _ready():
 	$AnimationPlayer.play("idle")
 	enemy_idle_state.player_detected.connect(fsm.change_state.bind(enemy_alert_state))
 	enemy_alert_state.player_lost.connect(fsm.change_state.bind(enemy_idle_state))
+	enemy_alert_state.alert_state_timer_fired.connect(fsm.change_state.bind(enemy_attack_state))
 
 
 func _physics_process(delta):
@@ -54,9 +56,17 @@ func _stow_guns():
 	$AnimationPlayer.play_backwards("deploy_guns")
 	
 	$Sprites/MainBodyAlert.visible = false
+	$Sprites/MainBodyAttack.visible = false
+	
 	$PointLight2D.energy = 0.1
 	$PointLight2D.color = Color.WHITE
 	
+func attack(_target: Node2D):
+	$Sprites/MainBodyAlert.visible = false
+	$Sprites/MainBodyAttack.visible = true
+	
+	$PointLight2D.color = Color("red")
+	$PointLight2D.energy = 0.6
 
 func _on_enemy_idle_state_player_detected():
 	_deploy_guns()
