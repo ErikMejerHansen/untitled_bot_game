@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://drvq40vdasp26"]
+
+[ext_resource type="Texture2D" uid="uid://c4t7wywcp0vko" path="res://sprites/sprites/bot/smoke_puff.png" id="1_xka61"]
+
+[sub_resource type="Curve" id="Curve_lw2gm"]
+_data = [Vector2(0.037037, 0.373691), 0.0, -0.340881, 0, 0, Vector2(1, 0.0224131), -1.61751, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cxmdp"]
+curve = SubResource("Curve_lw2gm")
+
+[sub_resource type="Gradient" id="Gradient_omo5p"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5eas0"]
+gradient = SubResource("Gradient_omo5p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kofrr"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 100.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 20.0
+angle_min = -81.7
+angle_max = 169.8
+flatness = 0.131
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+tangential_accel_max = 26.2
+scale_min = 0.6
+scale_max = 1.2
+color_ramp = SubResource("GradientTexture1D_5eas0")
+alpha_curve = SubResource("CurveTexture_cxmdp")
+
+[node name="DroneHurtParticleEffect" type="GPUParticles2D"]
+position = Vector2(-2, 3)
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_kofrr")
+texture = ExtResource("1_xka61")
+lifetime = 3.0
+explosiveness = 0.22
+randomness = 0.61

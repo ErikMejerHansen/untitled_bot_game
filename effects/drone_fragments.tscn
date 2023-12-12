@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cewljhxmuox7j"]
+
+[ext_resource type="Texture2D" uid="uid://d3uhhfbtcapvt" path="res://sprites/sprites/bot/drone_fragment.png" id="1_ao4hp"]
+
+[sub_resource type="Gradient" id="Gradient_iwtbx"]
+offsets = PackedFloat32Array(0, 0.942363, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.485703, 0.485704, 0.485703, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kb4me"]
+gradient = SubResource("Gradient_iwtbx")
+
+[sub_resource type="Curve" id="Curve_ekoa8"]
+_data = [Vector2(0.0222222, 1), 0.0, -0.0350109, 0, 0, Vector2(0.451852, 0.989108), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_a3py0"]
+curve = SubResource("Curve_ekoa8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fwd0f"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 100.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 75.0
+angle_min = -264.1
+angle_max = 295.5
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+angular_velocity_min = 1.4988e-14
+angular_velocity_max = 1.4988e-14
+radial_velocity_min = 200.0
+radial_velocity_max = 200.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+linear_accel_min = -57.64
+linear_accel_max = 100.0
+radial_accel_min = -27.95
+radial_accel_max = 36.68
+scale_curve = SubResource("CurveTexture_a3py0")
+color_ramp = SubResource("GradientTexture1D_kb4me")
+
+[node name="DroneFragments" type="GPUParticles2D"]
+process_material = SubResource("ParticleProcessMaterial_fwd0f")
+texture = ExtResource("1_ao4hp")
+lifetime = 0.8
+explosiveness = 1.0
+randomness = 0.5

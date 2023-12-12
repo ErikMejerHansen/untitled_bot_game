@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=25 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -10,8 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dv1y76vr3qlg5" path="res://sprites/sprites/bot/drone_attack_v2_2.png" id="6_cxqix"]
 [ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]
+[ext_resource type="Script" path="res://components/ImpactComponent.gd" id="10_d84db"]
 [ext_resource type="Script" path="res://finite_state_machine/StateMachine.gd" id="12_fqhc6"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="12_fxggr"]
+[ext_resource type="PackedScene" uid="uid://drvq40vdasp26" path="res://effects/drone_hurt_particle_effect.tscn" id="12_nev84"]
 [ext_resource type="Script" path="res://enemies/Idle.gd" id="13_go3rp"]
 [ext_resource type="Script" path="res://finite_state_machine/EnemyAlertState.gd" id="14_ajot6"]
 [ext_resource type="Script" path="res://finite_state_machine/EnemyAttackState.gd" id="15_iolgv"]
@@ -145,6 +147,7 @@ radius = 1043.46
 position = Vector2(1391, 1202)
 motion_mode = 1
 script = ExtResource("1_tlhve")
+death_effect = ExtResource("12_nev84")
 
 [node name="DroneShadow" type="Sprite2D" parent="."]
 position = Vector2(120, 275)
@@ -182,17 +185,21 @@ texture = ExtResource("5_5vqra")
 visible = false
 texture = ExtResource("6_cxqix")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_2t7q2")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "impact_component") instance=ExtResource("5_2t7q2")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 health_component = NodePath("../HealthComponent")
 hit_effect = ExtResource("6_yj1i6")
+impact_component = NodePath("../ImpactComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_x2rme")
 
+[node name="ImpactComponent" type="Node" parent="."]
+script = ExtResource("10_d84db")
+
 [node name="HealthComponent" parent="." instance=ExtResource("7_i56ju")]
-visible = false
 position = Vector2(2.08165e-12, 2.08165e-12)
+hurt_effect = ExtResource("12_nev84")
 MAX_HEALTH = 400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -233,6 +240,7 @@ actor = NodePath("../..")
 search_area = NodePath("../../Area2D")
 behaviours = NodePath("../../Behaviours")
 
+[connection signal="impact" from="ImpactComponent" to="." method="_on_impact_component_impact"]
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]
 [connection signal="player_lost" from="FiniteStateMachine/EnemyAlertState" to="." method="_on_player_lost"]
 [connection signal="player_lost" from="FiniteStateMachine/EnemyAttackState" to="." method="_on_player_lost"]

@@ -5,6 +5,7 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 
 @onready var area_2d = $Area2D
 @export var max_speed = 50
+@export var death_effect: PackedScene
 
 @onready var behaviours = $Behaviours as Behaviours
 @onready var fsm = $FiniteStateMachine as FiniteStateMachine
@@ -12,7 +13,10 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 @onready var enemy_alert_state = $FiniteStateMachine/EnemyAlertState as EnemyAlertState
 @onready var enemy_attack_state = $FiniteStateMachine/EnemyAttackState
 
+
 var guns_deployed = false
+var is_attacking = false
+var impact_force: Vector2
 
 
 func _ready():
@@ -27,14 +31,37 @@ func _physics_process(delta):
 	$DroneShadow.global_position = global_position - DROP_SHADOW_OFFSET
 	
 	var target_velocity = behaviours.get_target_velocity()
+	
+	
 
+	position += impact_force * 10
+	impact_force = impact_force.move_toward(Vector2.ZERO, delta)
+	
 	velocity = velocity.move_toward(target_velocity * max_speed, delta * 100)
 	rotation = velocity.angle()
-
+	
 	move_and_slide()
 
 func _on_die(_damage_source: Node2D):
+	
+	_add_explosion()
+	
+	await get_tree().create_timer(0.1).timeout
+	_add_explosion()
+	
+
+	$Sprites.visible = false
+	await get_tree().create_timer(1).timeout
+	
 	queue_free()
+
+func _add_explosion():
+	if not death_effect:
+		return 0
+		
+	var explosion = death_effect.instantiate()
+	add_child(explosion)
+	explosion.restart()
 
 func _deploy_guns():
 	if guns_deployed:
@@ -62,6 +89,8 @@ func _stow_guns():
 	$PointLight2D.color = Color.WHITE
 	
 func attack(_target: Node2D):
+	is_attacking = true
+	
 	$Sprites/MainBodyAlert.visible = false
 	$Sprites/MainBodyAttack.visible = true
 	
@@ -74,3 +103,10 @@ func _on_enemy_idle_state_player_detected():
 
 func _on_player_lost():
 	_stow_guns()
+
+
+func _on_impact_component_impact(push_back, _pos):
+	if not is_attacking:
+		fsm.change_state(enemy_attack_state)
+	impact_force = push_back
+

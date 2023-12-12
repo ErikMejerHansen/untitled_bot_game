@@ -17,6 +17,7 @@ func _ready():
 func _enter_state():
 	super._enter_state()
 	
+	actor._deploy_guns()
 	actor.attack(player)
 	
 	actor.max_speed = 350.0

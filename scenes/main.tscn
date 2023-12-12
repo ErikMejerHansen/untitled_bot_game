@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dolcc44gunbe1"]
+[gd_scene load_steps=33 format=3 uid="uid://dolcc44gunbe1"]
 
 [ext_resource type="Texture2D" uid="uid://0stnne8q378a" path="res://sprites/sprites/bot/tile_map.png" id="1_oscmn"]
 [ext_resource type="PackedScene" uid="uid://cpj8sk7bs5eou" path="res://player/player.tscn" id="2_ht55r"]
@@ -514,6 +514,13 @@ terrain_set_0/terrain_1/name = "Walls"
 terrain_set_0/terrain_1/color = Color(0.827451, 0.0705882, 0.0235294, 1)
 sources/0 = SubResource("TileSetAtlasSource_oau1a")
 
+[sub_resource type="Environment" id="Environment_sslda"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 3.9
+glow_strength = 1.29
+glow_blend_mode = 1
+
 [node name="Main" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -579,8 +586,27 @@ position = Vector2(2839, -565)
 rotation = -0.130808
 
 [node name="EnemyDrone" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(4077, 689)
+position = Vector2(4404, 1979)
 max_speed = 200
+
+[node name="EnemyDrone2" parent="." instance=ExtResource("4_qwyap")]
+position = Vector2(4188, 1188)
+max_speed = 200
+
+[node name="EnemyDrone3" parent="." instance=ExtResource("4_qwyap")]
+position = Vector2(4725, 656)
+max_speed = 200
+
+[node name="EnemyDrone4" parent="." instance=ExtResource("4_qwyap")]
+position = Vector2(3098, 1022)
+max_speed = 200
+
+[node name="EnemyDrone5" parent="." instance=ExtResource("4_qwyap")]
+position = Vector2(4249, -179)
+max_speed = 200
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sslda")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.709804, 0.788235, 0.835294, 1)

@@ -1,6 +1,8 @@
 class_name HitboxComponent
 extends Area2D
 
+
+
 @export var health_component: HealthComponent
 @export var hit_effect: PackedScene
 @export var impact_component: ImpactComponent
@@ -15,6 +17,7 @@ func _process(_delta):
 	pass
 
 func damage(amount, bullet: Bullet):
+	
 	if health_component:
 		health_component.damage(amount, bullet)
 		
