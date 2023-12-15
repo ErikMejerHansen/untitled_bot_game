@@ -226,6 +226,7 @@ muzzle_flash = NodePath("../Flash")
 position = Vector2(56, 1.5)
 
 [node name="Flash" type="Sprite2D" parent="Sprites/Gun1"]
+visible = false
 position = Vector2(76, 1.5)
 rotation = 1.5708
 texture = ExtResource("18_qcirg")
@@ -246,6 +247,7 @@ muzzle_flash = NodePath("../Flash")
 position = Vector2(56, 1.5)
 
 [node name="Flash" type="Sprite2D" parent="Sprites/Gun2"]
+visible = false
 position = Vector2(76, 1.5)
 rotation = 1.5708
 texture = ExtResource("18_qcirg")

@@ -39,7 +39,7 @@ func _physics_process(delta):
 	
 	var target_velocity = behaviours.get_target_velocity()
 	
-	if is_attacking:
+	if is_attacking and guns_deployed:
 		weapon1.shoot()
 		weapon2.shoot()
 
@@ -49,9 +49,6 @@ func _physics_process(delta):
 	velocity = velocity.move_toward(target_velocity * max_speed, delta * 100)
 	rotation = velocity.angle()
 	
-	#var material = color_rect.material as ShaderMaterial
-	#material.set_shader_parameter("worldPos", global_position)
-	#print(get_viewport_transform())
 	move_and_slide()
 
 func _on_die(_damage_source: Node2D):
@@ -80,8 +77,8 @@ func _deploy_guns():
 	if guns_deployed:
 		return
 	
-	guns_deployed = true
 	$AnimationPlayer.play("deploy_guns")
+	guns_deployed = true
 	
 	$Sprites/MainBodyAlert.visible = true
 	$PointLight2D.color = Color("ff4d00")
