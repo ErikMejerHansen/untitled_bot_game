@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=36 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dd6rr6t2ksd8x" path="res://components/hitbox_component.tscn" id="5_2t7q2"]
 [ext_resource type="Texture2D" uid="uid://7m1hoe3j7x7p" path="res://sprites/sprites/bot/drone_alert_v2.png" id="5_5vqra"]
 [ext_resource type="Texture2D" uid="uid://dv1y76vr3qlg5" path="res://sprites/sprites/bot/drone_attack_v2_2.png" id="6_cxqix"]
+[ext_resource type="Script" path="res://components/weapon.gd" id="6_jeukp"]
 [ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="6_yj1i6"]
 [ext_resource type="PackedScene" uid="uid://df8dta61nd0i" path="res://components/health_component.tscn" id="7_i56ju"]
+[ext_resource type="PackedScene" uid="uid://8wpsaxivv7xs" path="res://weapons/bullet.tscn" id="7_vo0rr"]
 [ext_resource type="Script" path="res://components/ImpactComponent.gd" id="10_d84db"]
 [ext_resource type="Script" path="res://finite_state_machine/StateMachine.gd" id="12_fqhc6"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="12_fxggr"]
@@ -213,10 +215,40 @@ position = Vector2(10, -60)
 scale = Vector2(2, 2)
 texture = ExtResource("3_3jswc")
 
+[node name="Weapon" type="Node" parent="Sprites/Gun1" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("6_jeukp")
+muzzle = NodePath("../Marker2D")
+rate_of_fire = 0.5
+bullet = ExtResource("7_vo0rr")
+muzzle_flash = NodePath("../Flash")
+
+[node name="Marker2D" type="Marker2D" parent="Sprites/Gun1"]
+position = Vector2(56, 1.5)
+
+[node name="Flash" type="Sprite2D" parent="Sprites/Gun1"]
+position = Vector2(76, 1.5)
+rotation = 1.5708
+texture = ExtResource("18_qcirg")
+
 [node name="Gun2" type="Sprite2D" parent="Sprites"]
 position = Vector2(10, 60)
 scale = Vector2(2, 2)
 texture = ExtResource("3_3jswc")
+
+[node name="Weapon" type="Node" parent="Sprites/Gun2" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("6_jeukp")
+muzzle = NodePath("../Marker2D")
+rate_of_fire = 0.5
+bullet = ExtResource("7_vo0rr")
+muzzle_flash = NodePath("../Flash")
+
+[node name="Marker2D" type="Marker2D" parent="Sprites/Gun2"]
+position = Vector2(56, 1.5)
+
+[node name="Flash" type="Sprite2D" parent="Sprites/Gun2"]
+position = Vector2(76, 1.5)
+rotation = 1.5708
+texture = ExtResource("18_qcirg")
 
 [node name="MainBodyIdle" type="Sprite2D" parent="Sprites"]
 texture = ExtResource("4_d0x75")

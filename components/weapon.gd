@@ -18,8 +18,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_pressed("shoot"):
-		shoot()
+	pass
 
 func shoot():
 	if can_fire:
@@ -28,8 +27,9 @@ func shoot():
 		var b = bullet.instantiate()
 		get_tree().get_root().add_child(b)
 		b.transform = muzzle.global_transform
+		await get_tree().create_timer(0.1).timeout
+		muzzle_flash.hide()
 		await get_tree().create_timer(rate_of_fire).timeout
 		can_fire = true
-		muzzle_flash.hide()
 	
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=23 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://sprites/sprites/bot/Torso.png" id="1_a7nsw"]
@@ -12,6 +12,10 @@
 [ext_resource type="Script" path="res://components/weapon.gd" id="8_xvp7w"]
 [ext_resource type="Texture2D" uid="uid://cssoa3praeucj" path="res://sprites/sprites/bot/muzzle_flash.png" id="9_dqbou"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="9_tnptp"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="13_bn3rn"]
+[ext_resource type="Script" path="res://components/ImpactComponent.gd" id="14_nfplc"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="15_lhovi"]
+[ext_resource type="PackedScene" uid="uid://coxmddbc5y7vj" path="res://effects/hard_surface_sparks.tscn" id="16_lfthm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s130o"]
 size = Vector2(1068, 531)
@@ -232,6 +236,9 @@ color = Color(0.176471, 0.176471, 0.176471, 0.356863)
 turbulence_enabled = true
 turbulence_noise_strength = 1.84
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ojnlt"]
+size = Vector2(438, 699)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(159, -114)
 motion_mode = 1
@@ -285,6 +292,7 @@ bullet = ExtResource("2_5upe2")
 muzzle_flash = NodePath("../MuzzleFlash")
 
 [node name="MuzzleFlash" type="Sprite2D" parent="left_arm"]
+visible = false
 position = Vector2(297, -23)
 texture = ExtResource("9_dqbou")
 
@@ -362,5 +370,23 @@ explosiveness = 0.09
 randomness = 0.09
 visibility_rect = Rect2(-100, 100, 200, 200)
 
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("13_bn3rn")
+MAX_HEALTH = 1000
+
+[node name="ImpactComponent" type="Node" parent="."]
+script = ExtResource("14_nfplc")
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "impact_component")]
+script = ExtResource("15_lhovi")
+health_component = NodePath("../HealthComponent")
+hit_effect = ExtResource("16_lfthm")
+impact_component = NodePath("../ImpactComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-45, 8.5)
+shape = SubResource("RectangleShape2D_ojnlt")
+
 [connection signal="rotation_clamped" from="left_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
 [connection signal="rotation_clamped" from="right_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
+[connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]

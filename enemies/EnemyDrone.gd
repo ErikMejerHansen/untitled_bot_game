@@ -15,6 +15,9 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 @onready var drone_explosion = $DroneExplosionParts
 @onready var drone_explosion_flames = $DroneExplosionFlames
 
+@onready var weapon1 = $Sprites/Gun1/Weapon
+@onready var weapon2 = $Sprites/Gun2/Weapon
+
 @onready var sprites = $Sprites
 
 
@@ -36,7 +39,9 @@ func _physics_process(delta):
 	
 	var target_velocity = behaviours.get_target_velocity()
 	
-	
+	if is_attacking:
+		weapon1.shoot()
+		weapon2.shoot()
 
 	position += impact_force * 10
 	impact_force = impact_force.move_toward(Vector2.ZERO, delta)
@@ -98,6 +103,7 @@ func _stow_guns():
 	
 func attack(_target: Node2D):
 	is_attacking = true
+	print("Attack")
 	
 	$Sprites/MainBodyAlert.visible = false
 	$Sprites/MainBodyAttack.visible = true

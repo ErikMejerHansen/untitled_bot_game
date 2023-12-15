@@ -579,6 +579,7 @@ position = Vector2(2839, -565)
 rotation = -0.130808
 
 [node name="EnemyDrone" parent="." instance=ExtResource("4_qwyap")]
+position = Vector2(5650, 85)
 max_speed = 200
 
 [node name="EnemyDrone2" parent="." instance=ExtResource("4_qwyap")]
@@ -586,11 +587,11 @@ position = Vector2(4230, 1938)
 max_speed = 200
 
 [node name="EnemyDrone3" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(761, 1517)
+position = Vector2(4893, 563)
 max_speed = 200
 
 [node name="EnemyDrone4" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(1137, 1758)
+position = Vector2(4196, -510)
 max_speed = 200
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
