@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cy6seo05bukma"]
+[gd_scene load_steps=34 format=3 uid="uid://cy6seo05bukma"]
 
 [ext_resource type="Script" path="res://enemies/EnemyDrone.gd" id="1_tlhve"]
 [ext_resource type="Texture2D" uid="uid://it43llmi1s3k" path="res://sprites/sprites/bot/drone_shadow.png" id="2_5akrv"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" path="res://enemies/Idle.gd" id="13_go3rp"]
 [ext_resource type="Script" path="res://finite_state_machine/EnemyAlertState.gd" id="14_ajot6"]
 [ext_resource type="Script" path="res://finite_state_machine/EnemyAttackState.gd" id="15_iolgv"]
+[ext_resource type="Texture2D" uid="uid://d3uhhfbtcapvt" path="res://sprites/sprites/bot/drone_fragment.png" id="18_c5rnu"]
+[ext_resource type="Texture2D" uid="uid://cv1kynbh5djqf" path="res://sprites/sprites/bot/large_muzzle_flash.png" id="18_qcirg"]
 
 [sub_resource type="Animation" id="Animation_xu4mr"]
 length = 3.0
@@ -143,8 +145,50 @@ radius = 144.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_kyt42"]
 radius = 1043.46
 
+[sub_resource type="Curve" id="Curve_3w06y"]
+_data = [Vector2(0.00632911, 0.983756), 0.0, 0.0, 0, 0, Vector2(0.86076, 0.798108), -0.970557, -0.970557, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nrefn"]
+curve = SubResource("Curve_3w06y")
+
+[sub_resource type="Curve" id="Curve_c6lrg"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -360), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ot8rn"]
+curve = SubResource("Curve_c6lrg")
+
+[sub_resource type="Curve" id="Curve_8pkdr"]
+_data = [Vector2(0.00843882, 0.993038), 0.0, 0.178373, 0, 0, Vector2(0.862869, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.49643), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4m17f"]
+curve = SubResource("Curve_8pkdr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5id6l"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 720.0
+angle_curve = SubResource("CurveTexture_ot8rn")
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+tangential_accel_min = -50.0
+tangential_accel_max = 63.79
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_4m17f")
+alpha_curve = SubResource("CurveTexture_nrefn")
+
 [node name="EnemyDrone" type="CharacterBody2D"]
-position = Vector2(1391, 1202)
+use_parent_material = true
+position = Vector2(1395, 1191)
 motion_mode = 1
 script = ExtResource("1_tlhve")
 death_effect = ExtResource("12_nev84")
@@ -203,12 +247,14 @@ hurt_effect = ExtResource("12_nev84")
 MAX_HEALTH = 400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(2.08165e-12, 2.08165e-12)
 shape = SubResource("CircleShape2D_w4n0x")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_kyt42")
 debug_color = Color(0.878431, 0.333333, 0.180392, 0.419608)
 
@@ -239,6 +285,24 @@ script = ExtResource("15_iolgv")
 actor = NodePath("../..")
 search_area = NodePath("../../Area2D")
 behaviours = NodePath("../../Behaviours")
+
+[node name="DroneExplosionFlames" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_5id6l")
+texture = ExtResource("18_qcirg")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="DroneExplosionParts" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_5id6l")
+texture = ExtResource("18_c5rnu")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="impact" from="ImpactComponent" to="." method="_on_impact_component_impact"]
 [connection signal="die" from="HealthComponent" to="." method="_on_die"]

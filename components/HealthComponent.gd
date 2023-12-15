@@ -7,6 +7,7 @@ signal die(bullet: Bullet)
 @export var MAX_HEALTH := 100
 
 var triggered_hurt_effect = false
+var is_dead = false
 
 var health : int
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +22,9 @@ func damage(attack: int, bullet: Bullet):
 		triggered_hurt_effect = true
 		var effect = hurt_effect.instantiate()
 		add_child(effect)
+		effect.restart()
 	
 	
-	if health <= 0:
+	if health <= 0 and not is_dead:
+		is_dead = true
 		die.emit(bullet)

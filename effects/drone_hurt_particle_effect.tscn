@@ -40,5 +40,4 @@ amount = 60
 process_material = SubResource("ParticleProcessMaterial_kofrr")
 texture = ExtResource("1_xka61")
 lifetime = 3.0
-explosiveness = 0.22
 randomness = 0.61

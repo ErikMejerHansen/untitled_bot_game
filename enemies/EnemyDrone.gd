@@ -11,7 +11,11 @@ const DROP_SHADOW_OFFSET = Vector2(-100, -275)
 @onready var fsm = $FiniteStateMachine as FiniteStateMachine
 @onready var enemy_idle_state = $FiniteStateMachine/EnemyIdleState as EnemyIdleState
 @onready var enemy_alert_state = $FiniteStateMachine/EnemyAlertState as EnemyAlertState
-@onready var enemy_attack_state = $FiniteStateMachine/EnemyAttackState
+@onready var enemy_attack_state = $FiniteStateMachine/EnemyAttackState as EnemyAttackState
+@onready var drone_explosion = $DroneExplosionParts
+@onready var drone_explosion_flames = $DroneExplosionFlames
+
+@onready var sprites = $Sprites
 
 
 var guns_deployed = false
@@ -40,18 +44,22 @@ func _physics_process(delta):
 	velocity = velocity.move_toward(target_velocity * max_speed, delta * 100)
 	rotation = velocity.angle()
 	
+	#var material = color_rect.material as ShaderMaterial
+	#material.set_shader_parameter("worldPos", global_position)
+	#print(get_viewport_transform())
 	move_and_slide()
 
 func _on_die(_damage_source: Node2D):
-	
 	_add_explosion()
-	
 	await get_tree().create_timer(0.1).timeout
 	_add_explosion()
+	_add_explosion()
 	
-
-	$Sprites.visible = false
-	await get_tree().create_timer(1).timeout
+	drone_explosion.restart()
+	drone_explosion_flames.restart()
+	sprites.visible = false
+	
+	await get_tree().create_timer(0.5).timeout
 	
 	queue_free()
 

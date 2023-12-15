@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dolcc44gunbe1"]
+[gd_scene load_steps=32 format=3 uid="uid://dolcc44gunbe1"]
 
 [ext_resource type="Texture2D" uid="uid://0stnne8q378a" path="res://sprites/sprites/bot/tile_map.png" id="1_oscmn"]
 [ext_resource type="PackedScene" uid="uid://cpj8sk7bs5eou" path="res://player/player.tscn" id="2_ht55r"]
@@ -514,13 +514,6 @@ terrain_set_0/terrain_1/name = "Walls"
 terrain_set_0/terrain_1/color = Color(0.827451, 0.0705882, 0.0235294, 1)
 sources/0 = SubResource("TileSetAtlasSource_oau1a")
 
-[sub_resource type="Environment" id="Environment_sslda"]
-background_mode = 3
-glow_enabled = true
-glow_intensity = 3.9
-glow_strength = 1.29
-glow_blend_mode = 1
-
 [node name="Main" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -532,20 +525,20 @@ layer_0/tile_data = PackedInt32Array(-3, 196608, 3, 65533, 196608, 3, 131069, 19
 metadata/_edit_group_ = true
 
 [node name="BlueLightGrate" parent="." instance=ExtResource("5_fi17i")]
-position = Vector2(3817, 968)
+position = Vector2(5455, -205)
 
 [node name="BlueLightGrate5" parent="." instance=ExtResource("5_fi17i")]
 position = Vector2(4996, 1896)
 rotation = 1.5708
 
 [node name="BlueLightGrate2" parent="." instance=ExtResource("5_fi17i")]
-position = Vector2(3813, 1243)
+position = Vector2(5454, 60)
 
 [node name="BlueLightGrate3" parent="." instance=ExtResource("5_fi17i")]
-position = Vector2(3813, 1521)
+position = Vector2(5454, 327)
 
 [node name="BlueLightGrate4" parent="." instance=ExtResource("5_fi17i")]
-position = Vector2(3812, 1794)
+position = Vector2(5452, 597)
 
 [node name="Player" parent="." instance=ExtResource("2_ht55r")]
 position = Vector2(2158, 713)
@@ -586,27 +579,19 @@ position = Vector2(2839, -565)
 rotation = -0.130808
 
 [node name="EnemyDrone" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(4404, 1979)
 max_speed = 200
 
 [node name="EnemyDrone2" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(4188, 1188)
+position = Vector2(4230, 1938)
 max_speed = 200
 
 [node name="EnemyDrone3" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(4725, 656)
+position = Vector2(761, 1517)
 max_speed = 200
 
 [node name="EnemyDrone4" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(3098, 1022)
+position = Vector2(1137, 1758)
 max_speed = 200
-
-[node name="EnemyDrone5" parent="." instance=ExtResource("4_qwyap")]
-position = Vector2(4249, -179)
-max_speed = 200
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_sslda")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.709804, 0.788235, 0.835294, 1)
