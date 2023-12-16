@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0rsug8ua21us"]
+[gd_scene load_steps=10 format=3 uid="uid://c0rsug8ua21us"]
 
 [ext_resource type="Texture2D" uid="uid://1j04wp1p0tjw" path="res://sprites/sprites/bot/right_gatlin.png" id="1_rnk5q"]
 [ext_resource type="Script" path="res://player/armaments/gatlin.gd" id="2_08ohl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://components/weapon.gd" id="4_2co0p"]
 [ext_resource type="PackedScene" uid="uid://8wpsaxivv7xs" path="res://weapons/bullet.tscn" id="5_64deo"]
 [ext_resource type="Texture2D" uid="uid://cv1kynbh5djqf" path="res://sprites/sprites/bot/large_muzzle_flash.png" id="6_5pt7b"]
+[ext_resource type="PackedScene" uid="uid://bo5ryo5tg0mfa" path="res://effects/smoke.tscn" id="7_jq0jo"]
 
 [sub_resource type="Gradient" id="Gradient_h372j"]
 offsets = PackedFloat32Array(0, 0.230986, 0.59, 1)
@@ -42,5 +43,9 @@ position = Vector2(668, 15)
 rotation = 1.5708
 scale = Vector2(2.27483, 9.22456)
 texture = ExtResource("6_5pt7b")
+
+[node name="OverheatSmoke" parent="." instance=ExtResource("7_jq0jo")]
+position = Vector2(369, 19)
+emitting = false
 
 [connection signal="rotation_clamped" from="RotationClamp" to="." method="_on_rotation_clamp_rotation_clamped"]

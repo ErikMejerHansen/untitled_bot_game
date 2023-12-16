@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=16 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://sprites/sprites/bot/Torso.png" id="1_a7nsw"]
 [ext_resource type="Texture2D" uid="uid://caehngcd7eyde" path="res://sprites/sprites/bot/left_foot.png" id="1_hl5vg"]
 [ext_resource type="Texture2D" uid="uid://umv3ece2nqil" path="res://sprites/sprites/bot/right_foot.png" id="2_0yd6b"]
 [ext_resource type="PackedScene" uid="uid://c0rsug8ua21us" path="res://player/armaments/gatlin.tscn" id="6_x48ji"]
-[ext_resource type="Texture2D" uid="uid://c4t7wywcp0vko" path="res://sprites/sprites/bot/smoke_puff.png" id="8_nv2u1"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="9_tnptp"]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id="13_bn3rn"]
 [ext_resource type="Script" path="res://components/ImpactComponent.gd" id="14_nfplc"]
@@ -220,17 +219,6 @@ _data = {
 "forward": SubResource("Animation_61avl")
 }
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k507m"]
-lifetime_randomness = 0.08
-particle_flag_disable_z = true
-direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-angular_velocity_max = 3.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-scale_min = 0.5
-color = Color(0.176471, 0.176471, 0.176471, 0.356863)
-turbulence_enabled = true
-turbulence_noise_strength = 1.84
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ojnlt"]
 size = Vector2(438, 699)
 
@@ -285,27 +273,6 @@ speed_scale = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.3, 0.3)
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(-211, 145)
-scale = Vector2(0.1, 0.1)
-process_material = SubResource("ParticleProcessMaterial_k507m")
-texture = ExtResource("8_nv2u1")
-speed_scale = 0.4
-explosiveness = 0.09
-randomness = 0.09
-visibility_rect = Rect2(-100, 100, 200, 200)
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
-position = Vector2(-211, -137)
-scale = Vector2(0.1, 0.1)
-amount = 7
-process_material = SubResource("ParticleProcessMaterial_k507m")
-texture = ExtResource("8_nv2u1")
-speed_scale = 0.4
-explosiveness = 0.09
-randomness = 0.09
-visibility_rect = Rect2(-100, 100, 200, 200)
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("13_bn3rn")

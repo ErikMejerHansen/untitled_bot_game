@@ -11,6 +11,8 @@ extends Armament
 @export var spin_decrease: float = 1
 @export var max_spin: float = 400
 
+@onready var overheat_smoke: GPUParticles2D = $OverheatSmoke
+
 var current_heat:float = 0.0
 var current_spin_speed = 0.0
 
@@ -30,6 +32,13 @@ func _process(delta):
 	current_spin_speed -= spin_decrease
 	current_spin_speed = max(0, current_spin_speed)
 
+	if current_heat < max_heat and overheat_smoke.emitting:	
+		overheat_smoke.emitting = false
+		
+	
+	if current_heat > max_heat and not overheat_smoke.emitting:
+		overheat_smoke.emitting = true
+
 
 func shoot():
 	current_spin_speed += spin_increase
@@ -38,10 +47,13 @@ func shoot():
 	if current_spin_speed < spin_needed:
 		return
 	
+	if current_heat > max_heat:
+		return
+	
 	if current_heat < max_heat:	
 		current_heat += heat_increment
 		super.shoot()
 	
-	if current_heat > heat_increment:
+	if current_heat > max_heat:
 		# Overheat! 
-		current_heat * 2
+		current_heat *= 1.5
