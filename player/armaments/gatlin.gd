@@ -12,9 +12,12 @@ extends Armament
 @export var max_spin: float = 400
 
 @onready var overheat_smoke: GPUParticles2D = $OverheatSmoke
+const RIGHT_GATLIN_BLURRED = preload("res://sprites/sprites/bot/right_gatlin_blurred.png")
+const RIGHT_GATLIN = preload("res://sprites/sprites/bot/right_gatlin.png")
 
 var current_heat:float = 0.0
 var current_spin_speed = 0.0
+var showing_blurred = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +26,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if not showing_blurred and current_spin_speed > 0:
+		showing_blurred = true
+		texture = RIGHT_GATLIN_BLURRED
+	
+	if showing_blurred and current_spin_speed == 0:
+		showing_blurred = false
+		texture = RIGHT_GATLIN
+	
 	current_heat -= heat_decrement * delta
 	current_heat = max(0, current_heat)
 	

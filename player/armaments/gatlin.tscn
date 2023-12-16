@@ -46,6 +46,5 @@ texture = ExtResource("6_5pt7b")
 
 [node name="OverheatSmoke" parent="." instance=ExtResource("7_jq0jo")]
 position = Vector2(369, 19)
-emitting = false
 
 [connection signal="rotation_clamped" from="RotationClamp" to="." method="_on_rotation_clamp_rotation_clamped"]
