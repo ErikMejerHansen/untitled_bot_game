@@ -15,7 +15,6 @@ enum ArmSide {Left, Right}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	match side:
 		ArmSide.Left:
 			scale = Vector2(1, -1)
@@ -29,7 +28,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 

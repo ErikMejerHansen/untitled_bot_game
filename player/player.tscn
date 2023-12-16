@@ -261,14 +261,12 @@ metadata/_edit_group_ = true
 position = Vector2(-84, -437)
 
 [node name="gatlin" parent="left_arm" instance=ExtResource("6_x48ji")]
-position = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="right_arm" type="Node2D" parent="."]
 position = Vector2(-84, 441)
 
 [node name="gatlin" parent="right_arm" instance=ExtResource("6_x48ji")]
-position = Vector2(2.08165e-12, 2.08165e-12)
-offset = Vector2(214, 25)
+side = 1
 
 [node name="torso" type="Sprite2D" parent="."]
 position = Vector2(-3, 2)

@@ -28,8 +28,8 @@ func shoot():
 		get_tree().get_root().add_child(b)
 		b.transform = muzzle.global_transform
 		await get_tree().create_timer(rate_of_fire/2).timeout
-		await get_tree().create_timer(rate_of_fire/2).timeout
 		muzzle_flash.hide()
+		await get_tree().create_timer(rate_of_fire/2).timeout
 		can_fire = true
 	
 	

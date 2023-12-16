@@ -1,17 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0rsug8ua21us"]
+[gd_scene load_steps=9 format=3 uid="uid://c0rsug8ua21us"]
 
 [ext_resource type="Texture2D" uid="uid://1j04wp1p0tjw" path="res://sprites/sprites/bot/right_gatlin.png" id="1_rnk5q"]
-[ext_resource type="Script" path="res://player/armament.gd" id="2_os7ny"]
+[ext_resource type="Script" path="res://player/armaments/gatlin.gd" id="2_08ohl"]
 [ext_resource type="Script" path="res://components/clamped_rotation.gd" id="3_n57tt"]
 [ext_resource type="Script" path="res://components/weapon.gd" id="4_2co0p"]
 [ext_resource type="PackedScene" uid="uid://8wpsaxivv7xs" path="res://weapons/bullet.tscn" id="5_64deo"]
 [ext_resource type="Texture2D" uid="uid://cv1kynbh5djqf" path="res://sprites/sprites/bot/large_muzzle_flash.png" id="6_5pt7b"]
 
+[sub_resource type="Gradient" id="Gradient_h372j"]
+offsets = PackedFloat32Array(0, 0.230986, 0.59, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.901961, 0.239216, 1, 1, 0, 0, 1, 2, 2, 2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7uu3c"]
+gradient = SubResource("Gradient_h372j")
+
 [node name="gatlin" type="Sprite2D" node_paths=PackedStringArray("weapon_1")]
-position = Vector2(-112, -436)
+position = Vector2(2.08165e-12, 2.08165e-12)
 texture = ExtResource("1_rnk5q")
 offset = Vector2(197, 20)
-script = ExtResource("2_os7ny")
+script = ExtResource("2_08ohl")
+color_change = SubResource("GradientTexture1D_7uu3c")
 weapon_1 = NodePath("LeftWeapon")
 
 [node name="RotationClamp" type="Node" parent="."]
@@ -30,9 +38,9 @@ bullet = ExtResource("5_64deo")
 muzzle_flash = NodePath("../MuzzleFlash")
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
-position = Vector2(545, 20)
+position = Vector2(668, 15)
 rotation = 1.5708
-scale = Vector2(2.02456, 4.54192)
+scale = Vector2(2.27483, 9.22456)
 texture = ExtResource("6_5pt7b")
 
 [connection signal="rotation_clamped" from="RotationClamp" to="." method="_on_rotation_clamp_rotation_clamped"]

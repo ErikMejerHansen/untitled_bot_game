@@ -51,5 +51,5 @@ func _on_arm_rotation_clamp(clockwise):
 		rotate_counter_clockwise = true
 
 
-func _on_health_component_die(bullet):
+func _on_health_component_die(_bullet):
 	get_tree().reload_current_scene()
