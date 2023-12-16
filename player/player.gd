@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
-@onready var weapon_1 = $right_arm/Weapon1
-@onready var weapon_2 = $right_arm/Weapon2
-@onready var weapon_3 = $left_arm/Weapon3
-@onready var weapon_4 = $left_arm/Weapon4
 
 @export var SPEED = 100.0
 @export var ROTATE_SPEED = 0.7
+
+@export_category("Armaments")
+@export var left_armament: Armament
+@export var right_armament: Armament
+
 
 var rotate_clockwise = false
 var rotate_counter_clockwise = false
@@ -37,10 +38,10 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _shoot():
-	weapon_1.shoot()
-	weapon_2.shoot()
-	weapon_3.shoot()
-	weapon_4.shoot()
+	if left_armament:
+		left_armament.shoot()
+	if right_armament:
+		right_armament.shoot()
 
 func _on_arm_rotation_clamp(clockwise):
 	if(clockwise):

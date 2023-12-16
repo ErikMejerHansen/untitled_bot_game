@@ -1,16 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://cpj8sk7bs5eou"]
+[gd_scene load_steps=18 format=3 uid="uid://cpj8sk7bs5eou"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8pc4r"]
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://sprites/sprites/bot/Torso.png" id="1_a7nsw"]
 [ext_resource type="Texture2D" uid="uid://caehngcd7eyde" path="res://sprites/sprites/bot/left_foot.png" id="1_hl5vg"]
 [ext_resource type="Texture2D" uid="uid://umv3ece2nqil" path="res://sprites/sprites/bot/right_foot.png" id="2_0yd6b"]
-[ext_resource type="PackedScene" uid="uid://8wpsaxivv7xs" path="res://weapons/bullet.tscn" id="2_5upe2"]
-[ext_resource type="Texture2D" uid="uid://coe0e3eria5od" path="res://sprites/sprites/bot/left_armament.png" id="3_iu60i"]
-[ext_resource type="Texture2D" uid="uid://bbap885k80uf6" path="res://sprites/sprites/bot/right_armament.png" id="4_e1rui"]
-[ext_resource type="Script" path="res://components/clamped_rotation.gd" id="8_gabx1"]
+[ext_resource type="PackedScene" uid="uid://bqejugjgl6nx" path="res://player/armaments/standard.tscn" id="5_n5r8w"]
 [ext_resource type="Texture2D" uid="uid://c4t7wywcp0vko" path="res://sprites/sprites/bot/smoke_puff.png" id="8_nv2u1"]
-[ext_resource type="Script" path="res://components/weapon.gd" id="8_xvp7w"]
-[ext_resource type="Texture2D" uid="uid://cssoa3praeucj" path="res://sprites/sprites/bot/muzzle_flash.png" id="9_dqbou"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="9_tnptp"]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id="13_bn3rn"]
 [ext_resource type="Script" path="res://components/ImpactComponent.gd" id="14_nfplc"]
@@ -239,10 +234,12 @@ turbulence_noise_strength = 1.84
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ojnlt"]
 size = Vector2(438, 699)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("left_armament", "right_armament") groups=["player"]]
 position = Vector2(159, -114)
 motion_mode = 1
 script = ExtResource("1_8pc4r")
+left_armament = NodePath("left_arm")
+right_armament = NodePath("right_arm")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.19
@@ -260,76 +257,12 @@ position = Vector2(-96, 289)
 texture = ExtResource("2_0yd6b")
 metadata/_edit_group_ = true
 
-[node name="left_arm" type="Sprite2D" parent="."]
+[node name="left_arm" parent="." instance=ExtResource("5_n5r8w")]
 position = Vector2(-84, -437)
-texture = ExtResource("3_iu60i")
-offset = Vector2(172, -22)
 
-[node name="RotationClamp" type="Node" parent="left_arm" node_paths=PackedStringArray("sprite")]
-script = ExtResource("8_gabx1")
-min_angle = -45.0
-max_angle = 35.0
-sprite = NodePath("..")
-
-[node name="Muzzle3" type="Marker2D" parent="left_arm"]
-position = Vector2(355, -51)
-
-[node name="Weapon3" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
-script = ExtResource("8_xvp7w")
-muzzle = NodePath("../Muzzle3")
-rate_of_fire = 0.2
-bullet = ExtResource("2_5upe2")
-muzzle_flash = NodePath("../MuzzleFlash")
-
-[node name="Muzzle4" type="Marker2D" parent="left_arm"]
-position = Vector2(355, 3)
-
-[node name="Weapon4" type="Node" parent="left_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
-script = ExtResource("8_xvp7w")
-muzzle = NodePath("../Muzzle4")
-rate_of_fire = 0.2
-bullet = ExtResource("2_5upe2")
-muzzle_flash = NodePath("../MuzzleFlash")
-
-[node name="MuzzleFlash" type="Sprite2D" parent="left_arm"]
-visible = false
-position = Vector2(297, -23)
-texture = ExtResource("9_dqbou")
-
-[node name="right_arm" type="Sprite2D" parent="."]
+[node name="right_arm" parent="." instance=ExtResource("5_n5r8w")]
 position = Vector2(-84, 441)
-texture = ExtResource("4_e1rui")
-offset = Vector2(169, 25)
-
-[node name="RotationClamp" type="Node" parent="right_arm" node_paths=PackedStringArray("sprite")]
-script = ExtResource("8_gabx1")
-min_angle = -35.0
-max_angle = 45.0
-sprite = NodePath("..")
-
-[node name="Muzzle1" type="Marker2D" parent="right_arm"]
-position = Vector2(355, 4)
-
-[node name="Weapon1" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
-script = ExtResource("8_xvp7w")
-muzzle = NodePath("../Muzzle1")
-rate_of_fire = 0.2
-bullet = ExtResource("2_5upe2")
-muzzle_flash = NodePath("../MuzzleFlash")
-
-[node name="Muzzle2" type="Marker2D" parent="right_arm"]
-position = Vector2(355, 56)
-
-[node name="Weapon2" type="Node" parent="right_arm" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
-script = ExtResource("8_xvp7w")
-muzzle = NodePath("../Muzzle2")
-rate_of_fire = 0.2
-bullet = ExtResource("2_5upe2")
-muzzle_flash = NodePath("../MuzzleFlash")
-
-[node name="MuzzleFlash" type="Sprite2D" parent="right_arm"]
-position = Vector2(293, 26)
-texture = ExtResource("9_dqbou")
+side = 1
 
 [node name="torso" type="Sprite2D" parent="."]
 position = Vector2(-3, 2)
@@ -387,6 +320,6 @@ impact_component = NodePath("../ImpactComponent")
 position = Vector2(-45, 8.5)
 shape = SubResource("RectangleShape2D_ojnlt")
 
-[connection signal="rotation_clamped" from="left_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
-[connection signal="rotation_clamped" from="right_arm/RotationClamp" to="." method="_on_arm_rotation_clamp"]
+[connection signal="rotation_clamped" from="left_arm" to="." method="_on_arm_rotation_clamp"]
+[connection signal="rotation_clamped" from="right_arm" to="." method="_on_arm_rotation_clamp"]
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]

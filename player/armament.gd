@@ -1,16 +1,31 @@
-extends Node2D
+class_name Armament
+extends Sprite2D
 
-@onready var animation_player = $AnimationPlayer
-@onready var weapon_3 = $Weapon3 as Weapon
-@onready var weapon_4 = $Weapon4 as Weapon
+signal rotation_clamped(is_cw:bool)
 
-enum Side {LEFT, RIGHT}
-var last_fired_side 
+enum ArmSide {Left, Right}
+
+@export var side: ArmSide
+@export var weapon_1 : Weapon
+@export var weapon_2 : Weapon
+
+@onready var muzzle_flash = $MuzzleFlash
+@onready var rotation_clamp = $RotationClamp as ClampedRotationNode
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	last_fired_side = Side.LEFT
-	pass # Replace with function body.
+	
+	match side:
+		ArmSide.Left:
+			scale = Vector2(1, -1)
+			muzzle_flash.scale = Vector2(1, -1)
+			rotation_clamp.max_angle = 35
+			rotation_clamp.min_angle = -45
+		ArmSide.Right:
+			rotation_clamp.max_angle = 35
+			rotation_clamp.min_angle = -35
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,13 +34,12 @@ func _process(delta):
 
 
 func shoot():
-	match last_fired_side:
-		Side.LEFT:
-			last_fired_side = Side.RIGHT
-			weapon_3.shoot()
-			animation_player.play("shoot_left")
-			
-		Side.RIGHT:
-			last_fired_side = Side.LEFT
-			weapon_4.shoot()
-			animation_player.play("shoot_right")
+	if weapon_1:
+		weapon_1.shoot()
+	if weapon_2:
+		weapon_2.shoot()
+	
+
+
+func _on_rotation_clamp_rotation_clamped(is_cw):
+	rotation_clamped.emit(is_cw)

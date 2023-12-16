@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqejugjgl6nx"]
+
+[ext_resource type="Texture2D" uid="uid://bbap885k80uf6" path="res://sprites/sprites/bot/right_armament.png" id="1_75o7g"]
+[ext_resource type="Script" path="res://player/armament.gd" id="2_i5ifd"]
+[ext_resource type="Script" path="res://components/clamped_rotation.gd" id="3_es112"]
+[ext_resource type="Script" path="res://components/weapon.gd" id="4_7nu51"]
+[ext_resource type="PackedScene" uid="uid://8wpsaxivv7xs" path="res://weapons/bullet.tscn" id="5_0jy2n"]
+[ext_resource type="Texture2D" uid="uid://cssoa3praeucj" path="res://sprites/sprites/bot/muzzle_flash.png" id="6_3r3i5"]
+
+[node name="left_arm" type="Sprite2D" node_paths=PackedStringArray("weapon_1", "weapon_2")]
+position = Vector2(-84, -441)
+texture = ExtResource("1_75o7g")
+offset = Vector2(169, 25)
+script = ExtResource("2_i5ifd")
+weapon_1 = NodePath("LeftWeapon")
+weapon_2 = NodePath("RightWeapon")
+
+[node name="RotationClamp" type="Node" parent="."]
+script = ExtResource("3_es112")
+min_angle = -45.0
+max_angle = 35.0
+
+[node name="LeftMuzzle" type="Marker2D" parent="."]
+position = Vector2(336, 3)
+
+[node name="LeftWeapon" type="Node" parent="." node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("4_7nu51")
+muzzle = NodePath("../LeftMuzzle")
+rate_of_fire = 0.2
+bullet = ExtResource("5_0jy2n")
+muzzle_flash = NodePath("../MuzzleFlash")
+
+[node name="RightMuzzle" type="Marker2D" parent="."]
+position = Vector2(337, 54)
+
+[node name="RightWeapon" type="Node" parent="." node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("4_7nu51")
+muzzle = NodePath("../RightMuzzle")
+rate_of_fire = 0.2
+bullet = ExtResource("5_0jy2n")
+muzzle_flash = NodePath("../MuzzleFlash")
+
+[node name="MuzzleFlash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(293, 26)
+texture = ExtResource("6_3r3i5")
+
+[connection signal="rotation_clamped" from="RotationClamp" to="." method="_on_rotation_clamp_rotation_clamped"]
