@@ -100,7 +100,6 @@ func _stow_guns():
 	
 func attack(_target: Node2D):
 	is_attacking = true
-	print("Attack")
 	
 	$Sprites/MainBodyAlert.visible = false
 	$Sprites/MainBodyAttack.visible = true

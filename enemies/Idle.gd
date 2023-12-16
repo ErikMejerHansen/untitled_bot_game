@@ -26,7 +26,6 @@ func _enter_state():
 
 func _exit_state():
 	super._exit_state()
-	detection_area.body_entered.disconnect(_body_entered)
 
 func _body_entered(body):
 	if body.is_in_group("player"):

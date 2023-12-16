@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cssoa3praeucj" path="res://sprites/sprites/bot/muzzle_flash.png" id="6_3r3i5"]
 
 [node name="left_arm" type="Sprite2D" node_paths=PackedStringArray("weapon_1", "weapon_2")]
-position = Vector2(-84, -441)
+position = Vector2(2.08165e-12, 2.08165e-12)
 texture = ExtResource("1_75o7g")
 offset = Vector2(169, 25)
 script = ExtResource("2_i5ifd")
