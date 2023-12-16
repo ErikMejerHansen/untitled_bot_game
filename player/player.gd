@@ -25,6 +25,7 @@ func _physics_process(delta):
 		rotation -= ROTATE_SPEED * delta
 		rotate_counter_clockwise = false
 		
+	#var input_direction = Input.get_vector("backward", "forward", "left", "right")
 	var input_direction = Input.get_vector("backward", "forward", "left", "right")
 	var movement_direction = input_direction.rotated(rotation)
 	
