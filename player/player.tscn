@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://n3jev8tbjfto" path="res://sprites/sprites/bot/Torso.png" id="1_a7nsw"]
 [ext_resource type="Texture2D" uid="uid://caehngcd7eyde" path="res://sprites/sprites/bot/left_foot.png" id="1_hl5vg"]
 [ext_resource type="Texture2D" uid="uid://umv3ece2nqil" path="res://sprites/sprites/bot/right_foot.png" id="2_0yd6b"]
-[ext_resource type="PackedScene" uid="uid://c0rsug8ua21us" path="res://player/armaments/gatlin.tscn" id="6_x48ji"]
+[ext_resource type="PackedScene" uid="uid://d2k4dhn61qsg" path="res://player/armaments/chainsword.tscn" id="5_wytjy"]
 [ext_resource type="Texture2D" uid="uid://ck15gegvdbve3" path="res://sprites/2d_lights_and_shadows_neutral_point_light.webp" id="9_tnptp"]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id="13_bn3rn"]
 [ext_resource type="Script" path="res://components/ImpactComponent.gd" id="14_nfplc"]
@@ -226,8 +226,8 @@ size = Vector2(438, 699)
 position = Vector2(159, -114)
 motion_mode = 1
 script = ExtResource("1_8pc4r")
-left_armament = NodePath("left_arm/gatlin")
-right_armament = NodePath("right_arm/gatlin")
+left_armament = NodePath("left_arm/left_arm")
+right_armament = NodePath("right_arm/left_arm2")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.19
@@ -248,15 +248,14 @@ metadata/_edit_group_ = true
 [node name="left_arm" type="Node2D" parent="."]
 position = Vector2(-84, -437)
 
-[node name="gatlin" parent="left_arm" instance=ExtResource("6_x48ji")]
-position = Vector2(-1, 2)
+[node name="left_arm" parent="left_arm" instance=ExtResource("5_wytjy")]
 
 [node name="right_arm" type="Node2D" parent="."]
 position = Vector2(-84, 441)
 
-[node name="gatlin" parent="right_arm" instance=ExtResource("6_x48ji")]
-position = Vector2(-9, -3)
-offset = Vector2(153, 1)
+[node name="left_arm2" parent="right_arm" instance=ExtResource("5_wytjy")]
+position = Vector2(3, -9)
+side = 1
 
 [node name="torso" type="Sprite2D" parent="."]
 position = Vector2(-3, 2)
@@ -293,4 +292,6 @@ impact_component = NodePath("../ImpactComponent")
 position = Vector2(-45, 8.5)
 shape = SubResource("RectangleShape2D_ojnlt")
 
+[connection signal="rotation_clamped" from="left_arm/left_arm" to="." method="_on_arm_rotation_clamp"]
+[connection signal="rotation_clamped" from="right_arm/left_arm2" to="." method="_on_arm_rotation_clamp"]
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]

@@ -1,5 +1,5 @@
 class_name Armament
-extends Sprite2D
+extends Node2D
 
 signal rotation_clamped(is_cw:bool)
 

@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2k4dhn61qsg"]
+
+[ext_resource type="Texture2D" uid="uid://b3pc6t3w7t1jr" path="res://sprites/sprites/bot/chainsword.png" id="1_48had"]
+[ext_resource type="Script" path="res://player/armaments/chainsword.gd" id="2_ffn0c"]
+[ext_resource type="Script" path="res://components/clamped_rotation.gd" id="3_i4vrm"]
+[ext_resource type="Script" path="res://components/weapon.gd" id="4_s2k5u"]
+[ext_resource type="PackedScene" uid="uid://8wpsaxivv7xs" path="res://weapons/bullet.tscn" id="5_sum4b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2r88"]
+atlas = ExtResource("1_48had")
+region = Rect2(0, 0, 528, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqu7t"]
+atlas = ExtResource("1_48had")
+region = Rect2(0, 141, 528, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l64fw"]
+atlas = ExtResource("1_48had")
+region = Rect2(0, 282, 528, 141)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4apfc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2r88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqu7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l64fw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="Chainsword" type="AnimatedSprite2D" node_paths=PackedStringArray("animated_sprite")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+sprite_frames = SubResource("SpriteFrames_4apfc")
+frame_progress = 0.6178
+offset = Vector2(255, -11)
+script = ExtResource("2_ffn0c")
+animated_sprite = NodePath(".")
+
+[node name="RotationClamp" type="Node" parent="."]
+script = ExtResource("3_i4vrm")
+min_angle = -45.0
+max_angle = 35.0
+
+[node name="LeftWeapon" type="Node" parent="." node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("4_s2k5u")
+muzzle = NodePath("")
+rate_of_fire = 0.2
+bullet = ExtResource("5_sum4b")
+muzzle_flash = NodePath("")
+
+[node name="RightWeapon" type="Node" parent="." node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+script = ExtResource("4_s2k5u")
+muzzle = NodePath("")
+rate_of_fire = 0.2
+bullet = ExtResource("5_sum4b")
+muzzle_flash = NodePath("")
+
+[connection signal="rotation_clamped" from="RotationClamp" to="." method="_on_rotation_clamp_rotation_clamped"]
