@@ -19,11 +19,11 @@ func _ready():
 		ArmSide.Left:
 			scale = Vector2(1, -1)
 			muzzle_flash.scale = Vector2(1, -1)
-			rotation_clamp.max_angle = 15
-			rotation_clamp.min_angle = -25
+			rotation_clamp.max_angle = 35
+			rotation_clamp.min_angle = -45
 		ArmSide.Right:
-			rotation_clamp.max_angle = 15
-			rotation_clamp.min_angle = -15
+			rotation_clamp.max_angle = 45
+			rotation_clamp.min_angle = -35
 		
 
 

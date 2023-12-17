@@ -22,6 +22,15 @@ var showing_blurred = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	match side:
+		ArmSide.Left:
+			scale = Vector2(1, -1)
+			muzzle_flash.scale = Vector2(1, -1)
+			rotation_clamp.max_angle = 15
+			rotation_clamp.min_angle = -25
+		ArmSide.Right:
+			rotation_clamp.max_angle = 15
+			rotation_clamp.min_angle = -15
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,7 +48,7 @@ func _process(delta):
 	current_heat = max(0, current_heat)
 	
 	var color_overlay = color_change.gradient.sample(current_heat/max_heat)
-	modulate = color_overlay
+	self_modulate = color_overlay
 	
 	current_spin_speed -= spin_decrease
 	current_spin_speed = max(0, current_spin_speed)
