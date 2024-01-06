@@ -38,7 +38,7 @@ animations = [{
 [node name="Chainsword" type="AnimatedSprite2D" node_paths=PackedStringArray("animated_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 sprite_frames = SubResource("SpriteFrames_4apfc")
-frame_progress = 0.6178
+frame_progress = 0.83917
 offset = Vector2(255, -11)
 script = ExtResource("2_ffn0c")
 animated_sprite = NodePath(".")
@@ -48,18 +48,14 @@ script = ExtResource("3_i4vrm")
 min_angle = -45.0
 max_angle = 35.0
 
-[node name="LeftWeapon" type="Node" parent="." node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+[node name="LeftWeapon" type="Node" parent="."]
 script = ExtResource("4_s2k5u")
-muzzle = NodePath("")
 rate_of_fire = 0.2
 bullet = ExtResource("5_sum4b")
-muzzle_flash = NodePath("")
 
-[node name="RightWeapon" type="Node" parent="." node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+[node name="RightWeapon" type="Node" parent="."]
 script = ExtResource("4_s2k5u")
-muzzle = NodePath("")
 rate_of_fire = 0.2
 bullet = ExtResource("5_sum4b")
-muzzle_flash = NodePath("")
 
 [connection signal="rotation_clamped" from="RotationClamp" to="." method="_on_rotation_clamp_rotation_clamped"]

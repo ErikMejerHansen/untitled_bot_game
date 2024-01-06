@@ -1,0 +1,114 @@
+[gd_scene load_steps=4 format=3 uid="uid://kpf861lx1hj6"]
+
+[ext_resource type="Texture2D" uid="uid://ds4u3hymeuq1e" path="res://sprites/main_menu/logo@0.5x.png" id="1_elal4"]
+[ext_resource type="Texture2D" uid="uid://bjrg6sw00cuoa" path="res://sprites/main_menu/ground.png" id="2_uperd"]
+[ext_resource type="Texture2D" uid="uid://cql0sf62c4806" path="res://sprites/main_menu/bot.png" id="3_ftxot"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.780392, 0.372549, 1)
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -324.0
+offset_right = 442.0
+offset_bottom = 524.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.802)
+size_flags_horizontal = 6
+size_flags_vertical = 0
+texture = ExtResource("1_elal4")
+stretch_mode = 5
+
+[node name="Ground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -143.0
+offset_right = 1445.0
+offset_bottom = 338.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.601519, 0.857528)
+size_flags_horizontal = 6
+size_flags_vertical = 0
+texture = ExtResource("2_uperd")
+stretch_mode = 6
+
+[node name="Bot" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -577.0
+offset_top = -556.0
+offset_right = 1332.0
+offset_bottom = 863.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+size_flags_horizontal = 10
+size_flags_vertical = 8
+texture = ExtResource("3_ftxot")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -135.5
+offset_top = -602.0
+offset_right = 135.5
+offset_bottom = -211.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StartButton" type="Button" parent="Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 46
+text = "Start
+"
+
+[node name="OptionsButton" type="Button" parent="Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"OrangeButton"
+theme_override_font_sizes/font_size = 38
+text = "Options
+"
+
+[node name="CreditsButton" type="Button" parent="Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"PurpleButton"
+theme_override_font_sizes/font_size = 38
+text = "Credits
+"
