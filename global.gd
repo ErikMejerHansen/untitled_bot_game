@@ -20,11 +20,13 @@ func goto_scene(path):
 
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
-
+	
 	call_deferred("_deferred_goto_scene", path)
 
 
 func _deferred_goto_scene(path):
+	LoadingScreen.fade_out()
+	await get_tree().create_timer(0.5).timeout
 	# It is now safe to remove the current scene.
 	current_scene.free()
 
@@ -39,3 +41,6 @@ func _deferred_goto_scene(path):
 
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
+	
+	LoadingScreen.fade_in()
+	await get_tree().create_timer(0.5).timeout
